@@ -1,4 +1,4 @@
-package PT::DB::Result::URL;
+package PT::DB::Result::Url;
 # ABSTRACT: URL
 
 use Moose;
@@ -27,7 +27,7 @@ column title => {
 
 __PACKAGE__->add_data_created_updated;
 
-has_many 'user_urls', 'PT::DB::Result::UserURL', 'users_id', {
+has_many 'url_users', 'PT::DB::Result::UrlUser', 'url_id', {
   cascade_delete => 1,
 };
 

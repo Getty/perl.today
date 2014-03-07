@@ -92,9 +92,6 @@ has_many 'events', 'PT::DB::Result::Event', 'users_id', {
 has_many 'user_authys', 'PT::DB::Result::UserAuthy', 'users_id', {
   cascade_delete => 1,
 };
-has_many 'user_devices', 'PT::DB::Result::UserDevice', 'users_id', {
-  cascade_delete => 1,
-};
 has_many 'user_emails', 'PT::DB::Result::UserEmail', 'users_id', {
   cascade_delete => 1,
 };
@@ -108,9 +105,6 @@ has_many 'user_notifications', 'PT::DB::Result::UserNotification', 'users_id', {
   cascade_delete => 1,
 };
 has_many 'user_roles', 'PT::DB::Result::UserRole', 'users_id', {
-  cascade_delete => 1,
-};
-has_many 'user_urls', 'PT::DB::Result::UserURL', 'users_id', {
   cascade_delete => 1,
 };
 has_many 'user_notification_matrixes', 'PT::DB::Result::UserNotificationMatrix', 'users_id', {
