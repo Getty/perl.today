@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <: include "head.tx" :>
+</head>
+<body>
+  <: include "header.tx" :>
+  <div class="container">
+    <: include "breadcrumb.tx" :>
+    <: include $next_template() :>
+  </div>
+  <: include "alerts.tx" :>
+  <: include "footer.tx" :>
+  <: include "scripts.tx" :>
+</body>
+</html>

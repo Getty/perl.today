@@ -1,0 +1,26 @@
+<: if $login_failed { :>
+  <p class="notice error">
+    <i class="icn icon-warning-sign"></i>Login failed.
+  </p>
+<: } :>
+<div class="form-border">
+  <div class="form-wrap account-form halves">
+    <h2>Login</h2>
+    <form action="<: $u('My', 'login') :>" class="group" method="post">
+      <div class="account-items group">
+        <div class="half">
+          <label for="email" class="hide palm-block">Email</label>
+          <div class="input-wrap"><input type="text" placeholder="Your Email" title="Email" value="<: $email :>" name="email" class="text" /></div>
+        </div>
+        <div class="half">
+          <label for="password" class="hide palm-block">Password</label>
+          <div class="input-wrap"><input type="password" placeholder="Password" title="Create Password" name="password" class="text password" /></div>
+        </div>      
+      </div>
+      <hr class="clear" />
+      <div class="half">
+        <div class="half"><div class="input-wrap"><input type="submit" value="Login" class="button blue submit" name="login" /></div></div>
+      </div>    
+    </form>   
+  </div>
+</div>

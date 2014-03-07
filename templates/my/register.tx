@@ -1,0 +1,65 @@
+<: if $register_failed { :>
+  <p class="notice error">
+    <i class="icn icon-warning-sign"></i>An error occured while processing the registration, try again later.
+  </p>
+<: } :>
+<: if $wrong_captcha { :>
+  <p class="notice error">
+    <i class="icn icon-warning-sign"></i>The captcha is incorrect. Please try again.
+  </p>
+<: } :>
+<: if $not_valid_email { :>
+  <p class="notice error">
+    <i class="icn icon-warning-sign"></i>The email you have given is not properly formatted, please give a valid email address.
+  </p>
+<: } :> 
+<: if $email_exist { :>
+  <p class="notice error">
+    <i class="icn icon-warning-sign"></i>This email is already registered.
+  </p>
+<: } :> 
+<: if $password_too_short {  :> 
+  <p class="notice error">
+    <i class="icn icon-warning-sign"></i>Password must be at least 3 characters.
+  </p>
+<: } # with l(), this should be l($string,3) :>
+<: if $password_different {  :> 
+  <p class="notice error">
+    <i class="icn icon-warning-sign"></i>The passwords do not match. Please try again.
+  </p>
+<: } :>
+<div class="form-border">
+  <div class="form-wrap account-form halves">
+    <h2>Create a new account</h2>
+    <form action="<: $u('My', 'register') :>" class="group" method="post">
+      <div class="account-items group">
+        <div class="half">
+          <label for="nickname" class="hide palm-block">Nickname</label>
+          <div class="input-wrap"><input type="text" placeholder="Your Nickname" title="Your Nickname (optional)" name="nickname" value="<: $nickname :>" class="text"/></div>
+        </div>
+        <div class="half">
+          <label for="email" class="hide palm-block">Email</label>
+          <div class="input-wrap"><input type="text" placeholder="Your Email (Optional)" title="Your Email (required)" value="<: $email :>" name="email" class="text" /></div>
+        </div>
+        <div class="half">
+          <label for="password" class="hide palm-block">Password</label>
+          <div class="input-wrap"><input type="password" placeholder="Create Password" title="Create Password" name="password" class="text password" /></div>
+        </div>      
+        <div class="half">
+          <label for="repeat_password" class="hide palm-block">Repeat Password</label>
+          <div class="input-wrap"><input type="password" placeholder="Confirm Password" title="Confirm Password" name="repeat_password" class="text password" /></div>
+        </div>
+      </div>
+      <hr class="clear" />
+      <div class="half">
+        <div class="robo-blaster-wrap group">
+          <div class="captcha"><img src="<: $u('Root','captcha') :>" alt="nice try robot!" /></div>
+          <div class="captcha-validate"><div class="input-wrap"><input type="text" placeholder="Enter the phrase" title="r u real?" name="captcha" class="text"/></div></div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="half"><div class="input-wrap"><input type="submit" value="Create my account" class="button blue submit" name="register" /></div></div>
+      </div>    
+    </form>   
+  </div>
+</div>

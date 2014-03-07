@@ -1,0 +1,27 @@
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<: $u('Root','index') :>">
+        <span class="brand">perl.today</span>
+      </a>
+    </div>
+    <: if $c.user { :>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown"><b>Logged in</b> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <: if $c.user.admin { :>
+                <li><a href="">User Management</a></li>
+              <: } :>
+              <li class="divider"></li>
+              <li><a href="<: $u('Root','logout') :>">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    <: } :>
+  </div>
+</div>

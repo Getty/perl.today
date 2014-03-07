@@ -1,0 +1,5 @@
+<: if $c.session.alerts { :>
+  <: for $c.pop_alerts -> $alert { :>
+    <div class="useralert" data-title="<: $alert.title :>" data-text="<: $alert.text :>" data-type="<: $alert.type :>" />
+  <: } :>
+<: } :>

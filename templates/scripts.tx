@@ -1,0 +1,5 @@
+<script src="/js/jquery.js"></script>
+<script src="/bootstrap/js/bootstrap.js"></script>
+<script src="/jstree/jstree.js"></script>
+<script src="/pnotify/jquery.pnotify.js"></script>
+<script src="/js/pt.js"></script>

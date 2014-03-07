@@ -1,0 +1,134 @@
+@font-face {
+  font-family: 'ClearSans';
+  src:
+    url('/webfont/ClearSans-Regular.eot');
+  src:
+    url('/webfont/ClearSans-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/webfont/ClearSans-Regular.woff') format('woff'),
+    url('/webfont/ClearSans-Regular.ttf') format('truetype'),
+    url('/webfont/ClearSans-Regular.svg#ClearSansRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClearSans';
+  src:
+    url('/webfont/ClearSans-Italic.eot');
+  src:
+    url('/webfont/ClearSans-Italic.eot?#iefix') format('embedded-opentype'),
+    url('/webfont/ClearSans-Italic.woff') format('woff'),
+    url('/webfont/ClearSans-Italic.ttf') format('truetype'),
+    url('/webfont/ClearSans-Italic.svg#ClearSansItalic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'ClearSans';
+  src:
+    url('/webfont/ClearSans-Bold.eot');
+  src:
+    url('/webfont/ClearSans-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/webfont/ClearSans-Bold.woff') format('woff'),
+    url('/webfont/ClearSans-Bold.ttf') format('truetype'),
+    url('/webfont/ClearSans-Bold.svg#ClearSansBold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClearSans';
+  src:
+    url('/webfont/ClearSans-BoldItalic.eot');
+  src:
+    url('/webfont/ClearSans-BoldItalic.eot?#iefix') format('embedded-opentype'),
+    url('/webfont/ClearSans-BoldItalic.woff') format('woff'),
+    url('/webfont/ClearSans-BoldItalic.ttf') format('truetype'),
+    url('/webfont/ClearSans-BoldItalic.svg#ClearSansBoldItalic') format('svg');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'ClearSans';
+  src:
+    url('/webfont/ClearSans-Thin.eot');
+  src:
+    url('/webfont/ClearSans-Thin.eot?#iefix') format('embedded-opentype'),
+    url('/webfont/ClearSans-Thin.woff') format('woff'),
+    url('/webfont/ClearSans-Thin.ttf') format('truetype'),
+    url('/webfont/ClearSans-Thin.svg#ClearSansThin') format('svg');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClearSans';
+  src:
+    url('/webfont/ClearSans-Light.eot');
+  src:
+    url('/webfont/ClearSans-Light.eot?#iefix') format('embedded-opentype'),
+    url('/webfont/ClearSans-Light.woff') format('woff'),
+    url('/webfont/ClearSans-Light.ttf') format('truetype'),
+    url('/webfont/ClearSans-Light.svg#ClearSansLight') format('svg');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClearSans';
+  src:
+    url('/webfont/ClearSans-MediumItalic.eot');
+  src:
+    url('/webfont/ClearSans-MediumItalic.eot?#iefix') format('embedded-opentype'),
+    url('/webfont/ClearSans-MediumItalic.woff') format('woff'),
+    url('/webfont/ClearSans-MediumItalic.ttf') format('truetype'),
+    url('/webfont/ClearSans-MediumItalic.svg#ClearSansMediumItalic') format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'ClearSans';
+  src:
+    url('/webfont/ClearSans-Medium.eot');
+  src:
+    url('/webfont/ClearSans-Medium.eot?#iefix') format('embedded-opentype'),
+    url('/webfont/ClearSans-Medium.woff') format('woff'),
+    url('/webfont/ClearSans-Medium.ttf') format('truetype'),
+    url('/webfont/ClearSans-Medium.svg#ClearSansMedium') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: 70px;
+  margin-bottom: 60px;
+  font-family: "ClearSans";
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+#footer div {
+  margin: 20px;
+}
+
+.brand {
+  font-size: 20px;
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+}

@@ -1,0 +1,20 @@
+<: include "email/heading.tx" { title => 'Email validation' } :>
+<tr>
+  <td width="10"></td>
+  <td align="center" colspan="2">
+    <table cellpadding="0" cellspacing="5" border="0" bgcolor="#fff" <: style("msg_content") :>>
+      <tr>
+        <td colspan="2" valign="middle">
+          <h3 <: style("default") :>>
+            Validate your email through the following link:
+          </h3>
+          <h2 <: style("default") :>>
+            <a href="<: $validation_link :>"><: $validation_link :></a>
+          </h2>
+          <p <: style("sub_text") :>>Regards, <br/><i <: style("signoff") :>>The PT.net Team.</i></p>
+        </td>
+      </tr>
+    </table>
+  </td>
+  <td width="10"></td>
+</tr>

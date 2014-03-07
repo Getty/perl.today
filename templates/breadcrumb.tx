@@ -1,0 +1,13 @@
+<: if $breadcrumbs { :>
+  <ol class="breadcrumb">
+    <: for $breadcrumbs -> $breadcrumb { :>
+      <li<: if $~breadcrumb.is_last { :> class="active"<: } :>>
+        <: if $~breadcrumb.is_last || !$breadcrumb.url { :>
+          <: $breadcrumb.label :>
+        <: } else { :>
+          <a href="<: $breadcrumb.url :>"><: $breadcrumb.label :></a>
+        <: } :>
+      </li>
+    <: } :>
+  </ol>
+<: } :>
