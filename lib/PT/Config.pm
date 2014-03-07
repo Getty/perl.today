@@ -69,6 +69,7 @@ has_conf facebook_app_id => $ENV{PT_FACEBOOK_APP_ID}, undef;
 has_conf facebook_app_secret => $ENV{PT_FACEBOOK_APP_SECRET}, undef;
 has_conf twitter_consumer_key => $ENV{PT_TWITTER_CONSUMER_KEY}, undef;
 has_conf twitter_consumer_secret => $ENV{PT_TWITTER_CONSUMER_SECRET}, undef;
+has_conf steam_web_api => $ENV{PT_STEAM_WEB_API}, undef;
 
 has_conf is_live => PT_LIVE => 0;
 has_conf is_view => PT_VIEW => 0;
