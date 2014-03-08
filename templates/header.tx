@@ -2,7 +2,7 @@
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="<: $u('Root','index') :>">
-        <span class="brand">perl.today</span>
+        <span class="brand"><img style="margin:0px" height="50" src="/img/perl.today.png"></span>
       </a>
     </div>
     <: if $c.user { :>
