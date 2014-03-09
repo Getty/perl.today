@@ -21,6 +21,7 @@ export MANPATH="/home/user/usr/pt/man:$MANPATH"
 
 export PGDATA="/home/user/usr/pt/pgdata"
 export PGPORT=17375
+export PT_DB_PORT=17375
 export PGHOST="localhost"
 
 export PS1="\e[0;36m[\e[1;31mperl.today\e[0;36m]\e[0m $PS1"
