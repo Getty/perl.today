@@ -13,7 +13,6 @@ use File::Copy;
 use IO::All;
 use File::Spec;
 use File::ShareDir::ProjectDistDir;
-use Net::AIML;
 use Text::Xslate qw( mark_raw );
 use Class::Load qw( load_class );
 use POSIX;

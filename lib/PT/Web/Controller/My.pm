@@ -197,7 +197,7 @@ sub login :Chained('logged_out') :Args(0) {
 
   my $last_url = $c->session->{last_url};
 
-  if ( my $username = lc($c->req->params->{username}) and my $password = $c->req->params->{password} ) {
+  if ( my $username = $c->req->params->{username} and my $password = $c->req->params->{password} ) {
     if ($c->authenticate({
       username => $username,
       password => $password,
