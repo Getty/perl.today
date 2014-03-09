@@ -5,7 +5,6 @@ use Moose;
 use MooseX::NonMoose;
 extends 'PT::DB::Result';
 use DBIx::Class::Candy;
-use Prosody::Mod::Data::Access;
 use Digest::MD5 qw( md5_hex );
 use List::MoreUtils qw( uniq  );
 use Email::Valid;
