@@ -26,18 +26,7 @@ sub find_by_username {
   return;
 }
 
-sub find_by_email {
-  my ( $self, $email ) = @_;
-  my $user_email = $self->schema->rs('UserEmail')->find({
-    'LOWER(me.email) LIKE ?',[ plain_value => lc($email)]
-  });
-  if ($user_email) {
-    return $user_email->user;
-  }
-  return;
-}
-
-sub find_by_facebook_id {
+sub find_by_facebook {
   my ( $self, $facebook_id ) = @_;
   my $user_facebook = $self->schema->rs('UserFacebook')->find({
     facebook_id => $facebook_id,

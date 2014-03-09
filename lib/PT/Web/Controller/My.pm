@@ -102,8 +102,7 @@ sub register :Chained('logged_out') :Args(0) {
 
   return $c->detach if !$c->req->params->{register};
 
-  $c->stash->{email} = $c->req->params->{email};
-  $c->stash->{nickname} = $c->req->params->{nickname};
+  $c->stash->{username} = $c->req->params->{username};
 
   if (!$c->validate_captcha($c->req->params->{captcha})) {
     $c->stash->{wrong_captcha} = 1;
@@ -123,21 +122,15 @@ sub register :Chained('logged_out') :Args(0) {
     $error = 1;
   }
 
-  if ( !Email::Valid->address($c->req->params->{email}) ) {
-    $c->stash->{not_valid_email} = 1;
-    $error = 1;
-  }
-
   return $c->detach if $error;
   
   my $password = $c->req->params->{password};
-  my $email = $c->req->params->{email};
-  my $nickname = $c->req->params->{nickname};
+  my $username = $c->req->params->{username};
   
-  my $find_user = $c->d->find_user('email',$email);
+  my $find_user = $c->pt->find_user('username',$username);
 
   if ($find_user) {
-    $c->stash->{email_exist} = $email;
+    $c->stash->{username_exist} = $username;
     $error = 1;
   }
 
@@ -145,10 +138,9 @@ sub register :Chained('logged_out') :Args(0) {
 
   $c->pt->db->txn_do(sub {
 
-    my $user = $c->d->create_user($nickname);
+    my $user = $c->d->create_user($username);
 
     if ($user) {
-      $user->add_email($email,1); # primary email
       $user->password($password);
       $user->update;
     } else {
@@ -167,9 +159,7 @@ sub login_facebook :Chained('base') :Args(0) {
   $c->stash->{not_last_url} = 1;
 
   my $user = $c->authenticate({
-    scope => [qw(
-      email
-    )],
+    scope => [qw()],
   },'facebook');
 
   $c->detach unless $user;
@@ -186,9 +176,6 @@ sub login_twitter :Chained('base') :Args {
   $c->stash->{not_last_url} = 1;
 
   my $user = $c->authenticate({
-    scope => [qw(
-      email
-    )],
   },'twitter');
 
   $c->detach unless $user;
@@ -210,11 +197,11 @@ sub login :Chained('logged_out') :Args(0) {
 
   my $last_url = $c->session->{last_url};
 
-  if ( my $username = lc($c->req->params->{email}) and my $password = $c->req->params->{password} ) {
+  if ( my $username = lc($c->req->params->{username}) and my $password = $c->req->params->{password} ) {
     if ($c->authenticate({
       username => $username,
       password => $password,
-    }, 'users')) {
+    }, 'username')) {
       $c->set_new_action_token;
       $last_url = $c->chained_uri('My','account') unless defined $last_url;
       $c->response->redirect($last_url);
@@ -223,8 +210,7 @@ sub login :Chained('logged_out') :Args(0) {
       $c->stash->{login_failed} = 1;
     }
   }
-  $c->stash->{email} = $c->req->params->{email};
-
+  $c->stash->{username} = $c->req->params->{username};
 }
 
 sub forgotpw :Chained('logged_out') :Args(0) {

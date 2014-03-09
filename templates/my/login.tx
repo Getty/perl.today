@@ -9,8 +9,8 @@
     <form action="<: $u('My', 'login') :>" class="group" method="post">
       <div class="account-items group">
         <div class="half">
-          <label for="email" class="hide palm-block">Email</label>
-          <div class="input-wrap"><input type="text" placeholder="Your Email" title="Email" value="<: $email :>" name="email" class="text" /></div>
+          <label for="username" class="hide palm-block">Username or Email</label>
+          <div class="input-wrap"><input type="text" placeholder="Your username or email" title="Username" value="<: $username :>" name="username" class="text" /></div>
         </div>
         <div class="half">
           <label for="password" class="hide palm-block">Password</label>

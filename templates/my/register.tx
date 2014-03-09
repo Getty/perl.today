@@ -8,14 +8,9 @@
     <i class="icn icon-warning-sign"></i>The captcha is incorrect. Please try again.
   </p>
 <: } :>
-<: if $not_valid_email { :>
+<: if $username_exist { :>
   <p class="notice error">
-    <i class="icn icon-warning-sign"></i>The email you have given is not properly formatted, please give a valid email address.
-  </p>
-<: } :> 
-<: if $email_exist { :>
-  <p class="notice error">
-    <i class="icn icon-warning-sign"></i>This email is already registered.
+    <i class="icn icon-warning-sign"></i>This username is already registered.
   </p>
 <: } :> 
 <: if $password_too_short {  :> 
@@ -34,12 +29,8 @@
     <form action="<: $u('My', 'register') :>" class="group" method="post">
       <div class="account-items group">
         <div class="half">
-          <label for="nickname" class="hide palm-block">Nickname</label>
-          <div class="input-wrap"><input type="text" placeholder="Your Nickname" title="Your Nickname (optional)" name="nickname" value="<: $nickname :>" class="text"/></div>
-        </div>
-        <div class="half">
-          <label for="email" class="hide palm-block">Email</label>
-          <div class="input-wrap"><input type="text" placeholder="Your Email (Optional)" title="Your Email (required)" value="<: $email :>" name="email" class="text" /></div>
+          <label for="username" class="hide palm-block">Username</label>
+          <div class="input-wrap"><input type="text" placeholder="Your Username" title="Your Username (required)" value="<: $username :>" name="username" class="text" /></div>
         </div>
         <div class="half">
           <label for="password" class="hide palm-block">Password</label>

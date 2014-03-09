@@ -35,18 +35,18 @@ sub find_user {
   my ( $self, $userinfo ) = @_;
 
   my $username;
-  if ($self->realm eq 'username') {
+  if ($self->realm->name eq 'username') {
     $username = delete $userinfo->{'username'};
     warn "can't handle other user attributes so far" if %{$userinfo};   
-  } elsif ($self->realm eq 'facebook') {
+  } elsif ($self->realm->name eq 'facebook') {
     $username = delete $userinfo->{'token'};
     warn "can't handle other user attributes on facebook" if %{$userinfo};
-  } elsif ($self->realm eq 'twitter') {
+  } elsif ($self->realm->name eq 'twitter') {
 
   }
 
   return unless $username;
-  return $self->c->pt->find_user($self->realm,$username);
+  return $self->c->pt->find_user($self->realm->name,$username);
 }
 
 1;

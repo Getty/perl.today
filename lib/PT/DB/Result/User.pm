@@ -37,16 +37,30 @@ column password => {
   encode_check_method => 'check_password',
 };
 
-column email_notification_content => {
-  data_type => 'int',
-  is_nullable => 0,
-  default_value => 1,
+column email => {
+  data_type => 'text',
+  is_nullable => 1,
 };
 
 column admin => {
   data_type => 'int',
   is_nullable => 0,
   default_value => 0,
+};
+
+column newemail => {
+  data_type => 'text',
+  is_nullable => 1,
+};
+
+column newemail_token => {
+  data_type => 'text',
+  is_nullable => 1,
+};
+
+column newemail_token_created => {
+  data_type => 'timestamp with time zone',
+  is_nullable => 1,
 };
 
 column forgotpw_token => {
@@ -63,6 +77,15 @@ column notes => {
   data_type => 'text',
   is_nullable => 1,
 };
+
+column session => {
+  data_type => 'text',
+  is_nullable => 0,
+  serializer_class => 'JSON',
+  default_value => '{}',
+};
+sub get_session_data { shift->session }
+sub store_session_data { shift->session(@_) }
 
 column messages => {
   data_type => 'text',
@@ -86,9 +109,6 @@ has_many 'events', 'PT::DB::Result::Event', 'users_id', {
   cascade_delete => 0,
 };
 has_many 'user_authys', 'PT::DB::Result::UserAuthy', 'users_id', {
-  cascade_delete => 1,
-};
-has_many 'user_emails', 'PT::DB::Result::UserEmail', 'users_id', {
   cascade_delete => 1,
 };
 has_many 'user_facebooks', 'PT::DB::Result::UserFacebook', 'users_id', {

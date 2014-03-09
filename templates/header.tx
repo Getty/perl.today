@@ -5,23 +5,29 @@
         <span class="brand"><img style="margin:0px" height="50" src="/img/perl.today.png"></span>
       </a>
     </div>
-    <: if $c.user { :>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <: # TODO :>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <: if $c.user { :>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown"><b>Logged in</b> <b class="caret"></b></a>
+            <a class="dropdown-toggle" data-toggle="dropdown"><b><: $c.user.username :></b> <b class="caret"></b></a>
             <ul class="dropdown-menu">
+              <li><a href="<: $u('My','account') :>">My Account</a></li>
               <: if $c.user.admin { :>
-                <li><a href="">User Management</a></li>
+                <li><a href="<: $u('AdminFeed','index') :>">Feed Management</a></li>
+                <li><a href="<: $u('AdminUser','index') :>">User Management</a></li>
               <: } :>
               <li class="divider"></li>
-              <li><a href="<: $u('Root','logout') :>">Logout</a></li>
+              <li><a href="<: $u('My','logout') :>">Logout</a></li>
             </ul>
           </li>
-        </ul>
-      </div>
-    <: } :>
+        <: } else { :>
+          <li><a href="<: $u('My','login') :>">Login</a></li>
+          <li><a href="<: $u('My','register') :>">Register</a></li>
+        <: } :>
+      </ul>
+    </div>
   </div>
 </div>
