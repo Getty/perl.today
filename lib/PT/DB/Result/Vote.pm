@@ -32,7 +32,7 @@ primary_key 'id';
 
 column users_id => {
   data_type => 'bigint',
-  is_nullable => 1,
+  is_nullable => 0,
 };
 
 column vote => {
@@ -45,7 +45,7 @@ __PACKAGE__->add_context_relations;
 
 __PACKAGE__->add_created_updated;
 
-unique_column [qw(
+unique_constraint [qw(
   users_id context context_id
 )];
 

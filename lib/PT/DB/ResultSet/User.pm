@@ -29,7 +29,7 @@ sub find_by_username {
 sub find_by_email {
   my ( $self, $email ) = @_;
   my $user_email = $self->schema->rs('UserEmail')->find({
-    email => $email,
+    'LOWER(me.email) LIKE ?',[ plain_value => lc($email)]
   });
   if ($user_email) {
     return $user_email->user;

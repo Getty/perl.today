@@ -540,12 +540,13 @@ sub delete_user {
 }
 
 sub create_user {
-	my ( $self, $nickname ) = @_;
+	my ( $self, $username ) = @_;
 
-	$nickname = undef unless defined $nickname and length($nickname);
+	die "username is required for a new user"
+		unless defined $username && length($username);
 
 	return $self->db->resultset('User')->create({
-		defined $nickname ? ( nickname => $nickname ) : (),
+		username => $username,
 	});
 }
 

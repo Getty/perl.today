@@ -15,11 +15,7 @@ table 'users';
 
 sub u {
   my ( $self ) = @_;
-  if (defined $self->username && length($self->username)) {
-    ['User','username',$self->username]
-  } else {
-    ['User','id',$self->id]
-  }
+  ['User','view',lc($self->username)]
 }
 
 column id => {
@@ -30,12 +26,7 @@ primary_key 'id';
 
 unique_column username => {
   data_type => 'text',
-  is_nullable => 1,
-};
-
-column nickname => {
-  data_type => 'text',
-  is_nullable => 1,
+  is_nullable => 0,
 };
 
 column password => {
@@ -84,6 +75,9 @@ column messages => {
 __PACKAGE__->add_data_created_updated;
 
 has_many 'url_users', 'PT::DB::Result::UrlUser', 'users_id', {
+  cascade_delete => 0,
+};
+has_many 'votes', 'PT::DB::Result::Vote', 'users_id', {
   cascade_delete => 0,
 };
 has_many 'comments', 'PT::DB::Result::Comment', 'users_id', {
