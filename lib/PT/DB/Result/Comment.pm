@@ -7,6 +7,10 @@ extends 'PT::DB::Result';
 use DBIx::Class::Candy;
 use namespace::autoclean;
 
+with qw(
+  PT::DB::Role::UpDownVote
+);
+
 table 'comment';
 
 sub u { 

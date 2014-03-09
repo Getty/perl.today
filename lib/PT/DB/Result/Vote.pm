@@ -45,6 +45,10 @@ __PACKAGE__->add_context_relations;
 
 __PACKAGE__->add_created_updated;
 
+unique_column [qw(
+  users_id context context_id
+)];
+
 belongs_to 'user', 'PT::DB::Result::User', 'users_id', {
   on_delete => 'no action',
 };
