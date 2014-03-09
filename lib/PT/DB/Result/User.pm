@@ -83,6 +83,9 @@ column messages => {
 
 __PACKAGE__->add_data_created_updated;
 
+has_many 'url_users', 'PT::DB::Result::UrlUser', 'users_id', {
+  cascade_delete => 0,
+};
 has_many 'comments', 'PT::DB::Result::Comment', 'users_id', {
   cascade_delete => 0,
 };

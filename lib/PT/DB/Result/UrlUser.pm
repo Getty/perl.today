@@ -20,7 +20,7 @@ column url_id => {
   is_nullable => 0,
 };
 
-column user_id => {
+column users_id => {
   data_type => 'bigint',
   is_nullable => 0,
 };
@@ -38,7 +38,7 @@ column description => {
 __PACKAGE__->add_data_created_updated;
 
 belongs_to 'url', 'PT::DB::Result::Url', 'url_id';
-belongs_to 'user', 'PT::DB::Result::Feed', 'user_id';
+belongs_to 'user', 'PT::DB::Result::Feed', 'users_id';
 
 ###############################
 
