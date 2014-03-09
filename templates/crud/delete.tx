@@ -1,0 +1,12 @@
+<div class="jumbotron">
+  <h1>Really delete <strong><: call($object,$object_name_attr) :></strong>?</h1>
+  <p>There is no coming back.</p>
+  <p>
+    <a href="<: callref($crud_url,'delete',$object,{ really_delete => 1 }) :>" class="btn btn-danger btn-lg" role="button">
+      Delete <: $object_name :>
+    </a>
+    <span class="text-right"><a href="<: callref($crud_url,'index') :>" class="btn btn-success btn-lg">
+      Back
+    </a></span>
+  </p>
+</div>

@@ -28,10 +28,23 @@ column feed_class => {
 column feed_args => {
   data_type => 'text',
   is_nullable => 0,
+  serializer_class => 'JSON',
   default_value => '{}',
 };
 
 __PACKAGE__->add_data_created_updated;
 
-no Moose;
-__PACKAGE__->meta->make_immutable;
+sub field_list {
+  my ( $self ) = @_;
+  [
+    url => { type => 'Text', required => 1, },
+    feed_class => { type => 'Text', required => 1, },
+    feed_args => {
+      type => 'TextArea',
+      inflate_method => sub { $_[0]->form->inflate_json($_[1]) },
+      deflate_method => sub { $_[0]->form->deflate_json($_[1]) },
+    },
+  ]
+}
+
+1;

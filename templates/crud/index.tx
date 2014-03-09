@@ -1,0 +1,33 @@
+<table class="table">
+  <tr>
+    <: for $table.cols -> $col { :>
+      <th><: $col.label :></td>
+    <: } :>
+    <th></th>
+  </tr>
+  <: for results($table.paged_rs) -> $result { :>
+    <tr>
+      <: for $table.cols -> $col { :>
+        <td><: $col.value($result) :></td>
+      <: } :>
+      <td class="text-right">
+        <: if $buttons { :>
+          <: for $buttons -> $button { :>
+            <a class="btn btn-<: $button.class || 'primary' :>" href="<: $u(callref($button.u,$result)) :>">
+              <: if $button.badge_sub { :>
+                <span class="badge"><: callref($button.badge_sub,$result) :></span>
+              <: } :>
+              <: $button.label :>
+            </a>
+          <: } :>
+        <: } :>
+        <a class="btn btn-success" href="<: callref($crud_url,'edit',$result) :>">
+          Edit
+        </a>
+        <a class="btn btn-danger" href="<: callref($crud_url,'delete',$result) :>">
+          Delete
+        </a>
+      </td>
+    </tr>
+  <: } :>
+</table>

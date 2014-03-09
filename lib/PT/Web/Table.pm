@@ -1,17 +1,17 @@
 package PT::Web::Table;
-# ABSTRACT: Class holding the functionality for a web table over a resultset
+# ABSTRACT:
 
 use Moose;
-use Digest::MD5 qw( md5_base64 );
-use List::MoreUtils qw( natatime );
-
 use PT::Web::Table::Column;
-use PT::Web::Table::Row;
+use List::MoreUtils qw( natatime );
+use Digest::MD5 qw( md5_base64 );
+use namespace::autoclean;
 
 has c => (
   is => 'ro',
   isa => 'PT::Web',
   required => 1,
+  weak_ref => 1,
 );
 
 has u => (
@@ -24,9 +24,9 @@ sub table_params {
   my ( $self ) = @_;
   (
     $self->page > 1 ? ( $self->key_page, $self->page ) : (),
-    $self->sorting ne $self->default_sorting
-      ? ( $self->key_sort, $self->sorting )
-      : (),
+    # $self->sorting ne $self->default_sorting
+    #   ? ( $self->key_sort, $self->sorting )
+    #   : (),
   )
 }
 
@@ -40,26 +40,14 @@ sub u_pagesize {
   return [@{$self->u},{ $self->table_params, $self->key_pagesize, $pagesize }];
 }
 
-sub u_sort {
-  my ( $self, $sort ) = @_;
-  return [@{$self->u},{ $self->table_params, $self->key_sort, $sort }];
-}
-
-has u_row => (
-  is => 'ro',
-  isa => 'CodeRef',
-  predicate => 'has_u_row',
-);
-
-has class => (
-  is => 'ro',
-  isa => 'Str',
-  predicate => 'has_class',
-);
+# sub u_sort {
+#   my ( $self, $sort ) = @_;
+#   return [@{$self->u},{ $self->table_params, $self->key_sort, $sort }];
+# }
 
 has resultset => (
   is => 'ro',
-  isa => 'PT::DB::ResultSet',
+  isa => 'DBIx::Class::ResultSet',
   required => 1,
 );
 sub resultset_search { shift->resultset->search({}) }
@@ -119,21 +107,6 @@ sub _new_col {
   );
 }
 
-has rows => (
-  is => 'ro',
-  isa => 'ArrayRef[PT::Web::Table::Row]',
-  lazy => 1,
-  default => sub {
-    my ( $self ) = @_;
-    [map {
-      PT::Web::Table::Row->new(
-        table => $self,
-        db => $_,
-      );
-    } $self->paged_rs->all]
-  },
-);
-
 has page => (
   is => 'ro',
   isa => 'Int',
@@ -141,81 +114,6 @@ has page => (
   default => sub {
     my ( $self ) = @_;
     return $self->c->req->param($self->key_page) || 1;
-  },
-);
-
-has default_sorting => (
-  is => 'ro',
-  isa => 'Undef|Str',
-  lazy => 1,
-  default => sub { undef },
-);
-
-has sorting => (
-  is => 'ro',
-  isa => 'Undef|Str',
-  lazy => 1,
-  default => sub {
-    my ( $self ) = @_;
-    my $sorting;
-    if ($self->has_sorting_options) {
-      if ($self->c->req->param($self->key_sort)) {
-        for (@{$self->sorting_options}) {
-          if (defined $_->{sorting} && $_->{sorting} eq $self->c->req->param($self->key_sort)) {
-            $sorting = $self->c->req->param($self->key_sort);
-            last;
-          }
-        }
-      }
-      $sorting = $self->default_sorting unless $sorting;
-    } else {
-      $sorting = $self->c->req->param($self->key_sort) || $self->default_sorting;
-    }
-    return $sorting;
-  },
-);
-
-has sorting_option => (
-  is => 'ro',
-  isa => 'Undef|HashRef',
-  lazy => 1,
-  default => sub {
-    my ( $self ) = @_;
-    if ($self->has_sorting_options) {
-      if ($self->c->req->param($self->key_sort)) {
-        for (@{$self->sorting_options}) {
-          if ($_->{sorting} eq $self->c->req->param($self->key_sort)) {
-            return $_;
-          }
-        }
-      }
-    }
-    return undef unless $self->sorting;
-    return { sorting => $self->sorting };
-  },
-);
-
-has sorting_options => (
-  is => 'ro',
-  isa => 'ArrayRef[HashRef]',
-  predicate => 'has_sorting_options',
-);
-
-has order_by => (
-  is => 'ro',
-  #isa => 'Undef|HashRef[Str]',
-  lazy => 1,
-  default => sub {
-    my ( $self ) = @_;
-    my $sorting = $self->sorting;
-    return undef unless $sorting;
-    return $self->sorting_option->{order_by} if defined $self->sorting_option->{order_by};
-    my ( $dir, $key ) = $sorting =~ m/^(-|\+)(.*)$/;
-    $dir = $dir eq '-' ? '-desc' : '-asc';
-    if ($key !~ m/\./) {
-      $key = 'me.'.$key;
-    }
-    return { $dir, $key };
   },
 );
 
@@ -254,16 +152,16 @@ has pagesize => (
 
 has paged_rs => (
   is => 'ro',
-  isa => 'PT::DB::ResultSet',
+  isa => 'DBIx::Class::ResultSet',
   lazy => 1,
   default => sub {
     my ( $self ) = @_;
     $self->resultset->search({},{
       page => $self->page,
       rows => $self->pagesize,
-      $self->sorting
-        ? ( order_by => $self->order_by )
-        : (),
+      # $self->sorting
+      #   ? ( order_by => $self->order_by )
+      #   : (),
     });
   },
 );

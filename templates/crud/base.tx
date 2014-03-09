@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="h2 panel-heading" style="margin-top:0px">
+    <: r($heading) :>
+  </div>
+  <: if $table { :>
+    <: include "crud/index.tx" :>
+  <: } else { :>
+    <div class="panel-body">
+      <: if $form { :>
+        <: include "crud/form.tx" :>
+      <: } elsif $crud_delete { :>
+        <: include "crud/delete.tx" :>
+      <: } :>
+    </div>
+  <: } :>
+</div>
+<: if $table { :>
+  <div class="text-right">
+    <a class="btn btn-success" href="<: callref($crud_url,'add') :>">
+      Add <: $object_name :>
+    </a>
+  </div>
+<: } :>

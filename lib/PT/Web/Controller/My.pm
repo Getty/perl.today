@@ -64,7 +64,7 @@ sub emailvalidate :Chained('base') :Args(2) {
   $c->stash->{user_id} = $user_id;
   $c->stash->{token} = $token;
 
-  my $user = $c->d->rs('User')->find($user_id);
+  my $user = $c->pt->rs('User')->find($user_id);
 
   unless ($user) {
     $c->stash->{no_user} = 1;
@@ -138,7 +138,7 @@ sub register :Chained('logged_out') :Args(0) {
 
   $c->pt->db->txn_do(sub {
 
-    my $user = $c->d->create_user($username);
+    my $user = $c->pt->create_user($username);
 
     if ($user) {
       $user->password($password);
@@ -221,7 +221,7 @@ sub forgotpw :Chained('logged_out') :Args(0) {
   $c->require_action_token;
 
   $c->stash->{forgotpw_email} = $c->req->params->{email};
-  my $user = $c->d->find_user('email',$c->req->params->{email});
+  my $user = $c->pt->find_user('email',$c->req->params->{email});
   if (!$user) {
     $c->stash->{no_user_found} = 1;
     return;
@@ -234,7 +234,7 @@ sub forgotpw :Chained('logged_out') :Args(0) {
   $c->stash->{forgotpw_link} = $c->chained_uri('My','forgotpw_tokencheck',$user->lowercase_username,$token);
 
   $user->do(sub {
-    $c->d->postman->template_mail(
+    $c->pt->postman->template_mail(
       $c->stash->{forgotpw_email},
       'Reset password for '.$user->nickname,
       'forgotpw',
@@ -252,7 +252,7 @@ sub resetpw :Chained('logged_out') :Args(2) {
   $c->stash->{user_id} = $user_id;
   $c->stash->{check_token} = $token;
 
-  my $user = $c->d->rs('User')->find($user_id);
+  my $user = $c->pt->rs('User')->find($user_id);
 
   return unless $user;
   unless ($user->forgotpw_token && $c->stash->{check_token} eq $user->forgotpw_token) {
@@ -282,7 +282,7 @@ sub resetpw :Chained('logged_out') :Args(2) {
 
   return unless $user->has_validated_email;
 
-  $c->d->postman->template_mail(
+  $c->pt->postman->template_mail(
     $user->email,
     'New password for you',
     'newpw',
@@ -385,11 +385,11 @@ sub changepw :Chained('logged_in') :Args(0) {
   return if $error;
   
   my $newpass = $c->req->params->{password};
-  $c->d->update_password($c->user->username,$newpass);
+  $c->pt->update_password($c->user->username,$newpass);
 
   if ($c->user->has_email) {
     $c->stash->{newpw_username} = $c->user->username;
-    $c->d->postman->template_mail(
+    $c->pt->postman->template_mail(
       $c->user->email,
       'New password for '.$c->user->username,
       'newpw',

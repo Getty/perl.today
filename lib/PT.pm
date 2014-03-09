@@ -5,7 +5,6 @@ use Moose;
 
 use PT::Config;
 use PT::DB;
-use PT::Markup;
 use PT::Envoy;
 use PT::Postman;
 use PT::Util::DateTime;
@@ -96,14 +95,6 @@ has db => (
 sub _build_db { PT::DB->connect(shift) }
 sub resultset { shift->db->resultset(@_) }
 sub rs { shift->resultset(@_) }
-
-# Markup Text parsing
-has markup => (
-	isa => 'PT::Markup',
-	is => 'ro',
-	lazy_build => 1,
-);
-sub _build_markup { PT::Markup->new({ pt => shift }) }
 
 # Notification System
 has envoy => (
@@ -278,16 +269,20 @@ sub _build_xslate {
 			},
 
 			# general functions avoiding xslates problems
-			call => sub {
-				my $thing = shift;
-				my $func = shift;
-				$thing->$func;
-			},
-			call_if => sub {
-				my $thing = shift;
-				my $func = shift;
-				$thing->$func if $thing;
-			},
+      call => sub {
+        my $thing = shift;
+        my $func = shift;
+        $thing->$func(@_);
+      },
+      callref => sub {
+        my $coderef = shift;
+        $coderef->(@_);
+      },
+      call_if => sub {
+        my $thing = shift;
+        my $func = shift;
+        $thing->$func(@_) if $thing;
+      },
 			replace => sub {
 				my $source = shift;
 				my $from = shift;

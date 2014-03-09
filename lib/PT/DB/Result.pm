@@ -21,23 +21,32 @@ __PACKAGE__->load_components(qw/
   +DBICx::Indexing
 /);
 
-sub context_config {
-  my ( $class, %opts ) = @_;
-
-{
-  'PT::DB::Result::Comment' => {
-    relation => 'comment',
-    prefetch => [qw( user parent ),(
-      $opts{comment_prefetch}
-        ? ($opts{comment_prefetch})
-        : ()
-    )],
-  },
-  'PT::DB::Result::Event' => {
-    relation => 'event',  
-  },
+sub new {
+  my $class = shift;
+  use DDP; p(@_);
+  my $self = $class->next::method(@_);
+  foreach my $col ($self->result_source->columns) {
+    my $default = $self->result_source->column_info($col)->{default_value};
+    $self->set_column($col,$default) if (defined $default && !defined $self->set_column($col));
+  }
+  return $self;
 }
 
+sub context_config {
+  my ( $class, %opts ) = @_;
+  {
+    'PT::DB::Result::Comment' => {
+      relation => 'comment',
+      prefetch => [qw( user parent ),(
+        $opts{comment_prefetch}
+          ? ($opts{comment_prefetch})
+          : ()
+      )],
+    },
+    'PT::DB::Result::Event' => {
+      relation => 'event',  
+    },
+  }
 }
 
 sub add_context_relations {
@@ -251,5 +260,4 @@ use overload '""' => sub {
   return (ref $self).' #'.$self->id;
 }, fallback => 1;
 
-no Moose;
-__PACKAGE__->meta->make_immutable;
+1;

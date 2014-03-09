@@ -16,6 +16,7 @@
             <ul class="dropdown-menu">
               <li><a href="<: $u('My','account') :>">My Account</a></li>
               <: if $c.user.admin { :>
+                <li class="divider"></li>
                 <li><a href="<: $u('AdminFeed','index') :>">Feed Management</a></li>
                 <li><a href="<: $u('AdminUser','index') :>">User Management</a></li>
               <: } :>

@@ -20,17 +20,17 @@ sub base :Chained('/') :PathPart('') :CaptureArgs(0) {
     }
   }
 
-  $c->d->current_user($c->user) if $c->user;
+  $c->pt->current_user($c->user) if $c->user;
 
-  $c->stash->{web_base} = $c->d->config->web_base;
+  $c->stash->{web_base} = $c->pt->config->web_base;
   $c->stash->{template_layout} = [ 'base.tx' ];
-  $c->stash->{pt_config} = $c->d->config;
+  $c->stash->{pt_config} = $c->pt->config;
   $c->stash->{prefix_title} = 'perl.today';
-  $c->stash->{user_counts} = $c->d->user_counts;
+  $c->stash->{user_counts} = $c->pt->user_counts;
   $c->stash->{page_class} = "texture";
-  $c->stash->{is_live} = $c->d->is_live;
-  $c->stash->{is_view} = $c->d->is_view;
-  $c->stash->{is_dev} = $c->d->is_dev;
+  $c->stash->{is_live} = $c->pt->is_live;
+  $c->stash->{is_view} = $c->pt->is_view;
+  $c->stash->{is_dev} = $c->pt->is_dev;
   $c->stash->{errors} = [];
 
   $c->set_new_action_token unless defined $c->session->{action_token};
@@ -52,7 +52,7 @@ sub media :Chained('base') :Args {
   my ( $self, $c, @args ) = @_;
   $c->stash->{not_last_url} = 1;
   my $filename = join("/",@args);
-  my $mediadir = $c->d->config->mediadir;
+  my $mediadir = $c->pt->config->mediadir;
   my $file = file($mediadir,$filename);
   unless (-f $file) {
     $c->response->status(404);
@@ -66,17 +66,17 @@ sub thumbnail :Chained('base') :Args {
   my ( $self, $c, @args ) = @_;
   $c->stash->{not_last_url} = 1;
   my $filename = join("/",@args);
-  my $mediadir = $c->d->config->mediadir;
+  my $mediadir = $c->pt->config->mediadir;
   my $file = file($mediadir,$filename);
   unless (-f $file) {
     $c->response->status(404);
     $c->response->body("Not found");
     return $c->detach;
   }
-  my $thumbnail_dir = dir($c->d->config->mediadir,'thumbnail');
+  my $thumbnail_dir = dir($c->pt->config->mediadir,'thumbnail');
   my $thumbnail = file($thumbnail_dir,$filename);
   unless (-f $thumbnail) {
-    my $media = $c->d->rs('Media')->find({ filename => $filename });
+    my $media = $c->pt->rs('Media')->find({ filename => $filename });
     if ($media) {
       my $dir = $thumbnail->dir;
       $dir->mkpath;
@@ -110,8 +110,8 @@ sub end : ActionClass('RenderView') {
   $c->session->{last_url} = $c->req->uri unless $c->stash->{not_last_url};
   if ($c->user) {
     $c->run_after_request(sub {
-      $c->d->reset_current_user;
-      $c->d->envoy->update_own_notifications;
+      $c->pt->reset_current_user;
+      $c->pt->envoy->update_own_notifications;
     });
   }
 

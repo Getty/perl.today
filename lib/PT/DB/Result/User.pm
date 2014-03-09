@@ -127,6 +127,21 @@ has_many 'user_notification_matrixes', 'PT::DB::Result::UserNotificationMatrix',
   cascade_delete => 0,
 };
 
+sub field_list {
+  my ( $self ) = @_;
+  [
+    username => { type => 'Text', required => 1, },
+    email => { type => 'Text', },
+    admin => { type => 'Select', options => [{
+      value => 0, label => 'No'
+    },{
+      value => 1, label => 'Yes'
+    }]},
+    password => { type => 'Password', },
+    notes => { type => 'TextArea', },
+  ]
+}
+
 after insert => sub {
   my ( $self ) = @_;
   $self->add_default_notifications;

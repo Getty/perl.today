@@ -29,6 +29,7 @@ use Class::Load ':all';
 use Digest::MD5 qw( md5_hex );
 
 use PT::Web::Table;
+use PT::Web::FormDBIC;
 
 use namespace::autoclean;
 
@@ -121,11 +122,10 @@ __PACKAGE__->config(
   },
 );
 
-sub d { # legacy - keep it
+sub pt { # legacy - keep it
   my ( $c, @args ) = @_;
   return $c->model('PT');
 }
-sub pt { shift->d(@_) }
 
 sub locate_components {
     my $class  = shift;
@@ -308,6 +308,13 @@ sub breadcrumb_add {
     label => $label,
     defined $u ? ( url => $c->chained_uri(@{$u}) ) : (),
   };
+}
+
+sub form_dbic {
+  my ( $c, $object, $field_list, %args ) = @_;
+  return PT::Web::FormDBIC->new_via_obj(
+    $object, $field_list, ctx => $c, %args
+  );
 }
 
 __PACKAGE__->setup();
