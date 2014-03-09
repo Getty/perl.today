@@ -58,7 +58,7 @@ requires 'File::Spec', '3.33';
 requires 'File::Temp', '0.2304';
 requires 'File::Which', '1.09';
 requires 'HTML::FormHandler', '0.40056';
-requires 'HTML::FormHandler::TraitFor::Model::DBIC', '0.28';
+requires 'HTML::FormHandler::TraitFor::Model::DBIC', '0.26';
 requires 'IO::All', '0.50';
 requires 'IO::Socket::SSL', '1.955';
 requires 'IPC::Run', '0.92';
