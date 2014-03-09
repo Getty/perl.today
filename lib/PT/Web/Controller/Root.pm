@@ -94,7 +94,14 @@ sub index :Chained('base') :PathPart('') :Args(0) {
   my ($self, $c) = @_;
   $c->stash->{not_last_url} = 1;
   $c->stash->{no_breadcrumb} = 1;
-  $c->stash->{title} = 'Welcome to perl.today';
+  $c->stash->{title} = 'Top links on perl.today';
+}
+
+sub latest :Chained('base') :Args(0) {
+  my ($self, $c) = @_;
+  $c->stash->{not_last_url} = 1;
+  $c->stash->{no_breadcrumb} = 1;
+  $c->stash->{title} = 'Latest hot links on perl.today';
 }
 
 sub default :Chained('base') :PathPart('') :Args {
