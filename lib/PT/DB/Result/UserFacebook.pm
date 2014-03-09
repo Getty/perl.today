@@ -20,7 +20,7 @@ column users_id => {
 	is_nullable => 0,
 };
 
-column facebook_id => {
+column code => {
 	data_type => 'bigint',
 	is_nullable => 0,
 };

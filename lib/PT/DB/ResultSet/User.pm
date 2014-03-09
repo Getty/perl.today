@@ -27,9 +27,9 @@ sub find_by_username {
 }
 
 sub find_by_facebook {
-  my ( $self, $facebook_id ) = @_;
+  my ( $self, $code ) = @_;
   my $user_facebook = $self->schema->rs('UserFacebook')->find({
-    facebook_id => $facebook_id,
+    code => $code,
   });
   if ($user_facebook) {
     return $user_facebook->user;

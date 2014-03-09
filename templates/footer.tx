@@ -1,6 +1,8 @@
 <div id="footer">
   <div class="copyright">
-    <p>Made by <a href="https://raudss.us/">Raudssus Social Software</a></p>
-    <p>Code at <a href="https://github.com/Getty/perl.today">GitHub</a></p>
+    <p>
+      Made by <a href="https://raudss.us/">Raudssus Social Software</a> |
+      Code at <a href="https://github.com/Getty/perl.today">GitHub</a>
+    </p>
   </div>
 </div>
