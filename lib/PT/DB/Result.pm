@@ -88,32 +88,6 @@ sub add_created {
   });
 }
 
-sub add_language_column {
-  my ( $class, $name, $attributes ) = @_;
-  my @languages = (qw( en de ));
-  for (@languages) {
-    my $col = $name.'_'.$_;
-    if (defined $attributes->{is_nullable} && $attributes->{is_nullable} == 0 && $_ ne PT->default_language) {
-      $class->add_column($col,{
-        %{$attributes},
-        is_nullable => 1,
-      });
-    } else {
-      $class->add_column($col, $attributes);
-    }
-  }
-  Package::Stash->new($class)->add_symbol('&'.$name,sub {
-    my ( $self, $language ) = @_;
-    my $default_func = $name.'_'.PT->default_language;
-    return $self->$default_func() unless $language;
-    my $lang_func = $name.'_'.$language;
-    my $return = $self->$lang_func();
-    return defined $return
-      ? $return
-      : $self->$default_func();
-  });
-}
-
 sub add_context_relations_role {
   my ( $class ) = @_;
   apply_all_roles($class,'PT::DB::Role::HasContext');
