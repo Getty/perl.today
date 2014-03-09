@@ -37,7 +37,7 @@ __PACKAGE__->add_data_created_updated;
 sub field_list {
   my ( $self ) = @_;
   [
-    url => { type => 'Text', required => 1, },
+    url => $self->field_url,
     feed_class => { type => 'Text', required => 1, },
     feed_args => {
       type => 'TextArea',

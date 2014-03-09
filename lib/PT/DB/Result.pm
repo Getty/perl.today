@@ -6,6 +6,7 @@ use MooseX::NonMoose;
 extends 'DBIx::Class::Core';
 use PT;
 use Package::Stash;
+use URI;
 use namespace::autoclean;
 
 use Moose::Util qw/ apply_all_roles /;
@@ -21,9 +22,12 @@ __PACKAGE__->load_components(qw/
   +DBICx::Indexing
 /);
 
+with qw(
+  PT::DB::Role::Fields
+);
+
 sub new {
   my $class = shift;
-  use DDP; p(@_);
   my $self = $class->next::method(@_);
   foreach my $col ($self->result_source->columns) {
     my $default = $self->result_source->column_info($col)->{default_value};
@@ -118,6 +122,7 @@ sub add_context_relations_belongs_to {
 }
 
 sub default_result_namespace { 'PT::DB::Result' }
+
 
 sub pt { shift->result_source->schema->pt }
 sub schema { shift->result_source->schema }

@@ -18,6 +18,7 @@ sub base :Chained('/admin/base') :PathPart('feed') :CaptureArgs(0) {
     u => sub {['AdminFeed','test',$_[0]->id]},
   }];
   $c->stash->{columns} = [
+    'ID' => 'id',
     'URL' => 'url',
     'Class' => 'feed_class',
   ];

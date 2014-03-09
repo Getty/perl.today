@@ -35,14 +35,12 @@ sub new_via_obj {
 
 sub inflate_json {
   my ( $self, $value ) = @_;
-  use DDP; p($value);
   my $json = JSON::MaybeXS->new->convert_blessed(1)->utf8(1)->pretty(1);
   return $json->decode($value);
 }
 
 sub deflate_json {
   my ( $self, $value ) = @_;
-  use DDP; p($value);
   my $json = JSON::MaybeXS->new->convert_blessed(1)->utf8(1)->pretty(1);
   return $json->encode($value);
 }
