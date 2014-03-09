@@ -127,7 +127,6 @@ sub add_users {
   my ( $self ) = @_;
   my $admin = $self->pt->create_user('Admin');
   $self->isa_ok($admin,'PT::DB::Result::User');
-  $admin->username('admin');
   $admin->password('testme');
   $admin->admin(1);
   $admin->notes('Testuser, admin');
