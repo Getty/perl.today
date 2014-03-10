@@ -3,24 +3,14 @@
     <i class="icn icon-warning-sign"></i>Login failed.
   </p>
 <: } :>
-<div class="form-border">
-  <div class="form-wrap account-form halves">
-    <h2>Login</h2>
-    <form action="<: $u('My', 'login') :>" class="group" method="post">
-      <div class="account-items group">
-        <div class="half">
-          <label for="username" class="hide palm-block">Username or Email</label>
-          <div class="input-wrap"><input type="text" placeholder="Your username or email" title="Username" value="<: $username :>" name="username" class="text" /></div>
-        </div>
-        <div class="half">
-          <label for="password" class="hide palm-block">Password</label>
-          <div class="input-wrap"><input type="password" placeholder="Password" title="Create Password" name="password" class="text password" /></div>
-        </div>      
-      </div>
-      <hr class="clear" />
-      <div class="half">
-        <div class="half"><div class="input-wrap"><input type="submit" value="Login" class="button blue submit" name="login" /></div></div>
-      </div>    
-    </form>   
-  </div>
+<div class="container">
+  <form class="form-signin" role="form">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+    <input type="password" name="password" class="form-control" placeholder="Password" required>
+    <!-- <label class="checkbox">
+      <input type="checkbox" value="remember-me"> Remember me
+    </label> -->
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
 </div>
