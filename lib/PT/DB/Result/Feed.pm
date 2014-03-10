@@ -16,6 +16,11 @@ column id => {
 };
 primary_key 'id';
 
+column name => {
+  data_type   => 'text',
+  is_nullable => 0,
+};
+
 column url => {
   data_type   => 'text',
   is_nullable => 0,
@@ -38,6 +43,7 @@ __PACKAGE__->add_data_created_updated;
 sub field_list {
   my ($self) = @_;
   [ url        => $self->field_url,
+    name       => { type => 'Text', required => 1, },
     feed_class => { type => 'Text', required => 1, },
     feed_args  => {
       type           => 'TextArea',
