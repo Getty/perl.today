@@ -122,10 +122,21 @@ sub register :Chained('logged_out') :Args(0) {
     $error = 1;
   }
 
+  if ( $c->req->params->{email} && !Email::Valid->address($c->req->params->{email}) ) {
+    $c->stash->{not_valid_email} = 1;
+    $error = 1;
+  }
+
+  if ($c->req->params->{username} !~ /^[a-zA-Z0-9_\.]+$/) {
+    $c->stash->{not_valid_chars} = 1;
+    $error = 1;
+  }
+
   return $c->detach if $error;
   
   my $password = $c->req->params->{password};
   my $username = $c->req->params->{username};
+  my $newemail = $c->req->params->{email};
   
   my $find_user = $c->pt->find_user('username',$username);
 
@@ -141,6 +152,7 @@ sub register :Chained('logged_out') :Args(0) {
     my $user = $c->pt->create_user($username);
 
     if ($user) {
+      $user->newemail($newemail);
       $user->password($password);
       $user->update;
     } else {
