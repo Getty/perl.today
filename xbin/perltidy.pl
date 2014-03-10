@@ -26,7 +26,9 @@ my $perltidyrc = $root->child('.perltidyrc');
 my $git        = Git::Wrapper->new($root);
 my $stats      = $git->status;
 
-my @dirty = ( $stats->get('added'), $stats->get('changed') );
+my @dirty;
+push @dirty, $stats->get('indexed');
+push @dirty, $stats->get('changed');
 
 sub tidy_vanilla {
   local @ARGV = ();
@@ -39,7 +41,14 @@ sub tidy_vanilla {
 
 for my $status (@dirty) {
   my $file = $root->child( $status->from );
-  next unless $file =~ /([.](pm|pl|t)$|cpanfile)/;
+  goto clean if $file->basename =~ /\.pm$/;
+  goto clean if $file->basename =~ /\.pl$/;
+  goto clean if $file->basename =~ /\.t$/;
+  goto clean if $file->basename =~ /^cpanfile/;
+
+  next;
+
+clean:
   my $tidy     = tidy_vanilla;
   my $tidyfile = $file . '.tdy';
   printf qq[Tidying %s\n], $file;
