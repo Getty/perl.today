@@ -56,3 +56,12 @@ Best is to grep for PGPORT.
 ```
 [perl.today] torsten@bigbird:~/usr/pt$ set | grep PGPORT
 ```
+
+Misc Install Issues
+===================
+
+HTML::FormHandler
+-----------------
+Perl =>5.19.5 + HTML::FormHandler + Data::Clone <= 0.003  Will crash your perl.
+
+Apply patch here: https://rt.cpan.org/Ticket/Display.html?id=92570
