@@ -47,4 +47,11 @@ sub field_list {
   ];
 }
 
+sub feed_handler {
+  my ($self) = @_;
+  require PT::Feed;
+  return PT::Feed->feed_handler( $self->feed_class, $self->url,
+    %{ $self->feed_args } );
+}
+
 1;
