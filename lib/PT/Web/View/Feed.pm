@@ -1,4 +1,5 @@
 package PT::Web::View::Feed;
+
 # ABSTRACT: Standard Catalyst Feed view
 
 use Moose;

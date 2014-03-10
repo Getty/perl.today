@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 use Catalyst::ScriptRunner;
-Catalyst::ScriptRunner->run('PT::Web', 'Test');
+Catalyst::ScriptRunner->run( 'PT::Web', 'Test' );
 
 1;
 

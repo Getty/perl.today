@@ -4,7 +4,7 @@ use Moose;
 extends 'PT::Web::Form';
 
 with qw(
-  HTML::FormHandler::TraitFor::Model::DBIC
+    HTML::FormHandler::TraitFor::Model::DBIC
 );
 
 no Moose;

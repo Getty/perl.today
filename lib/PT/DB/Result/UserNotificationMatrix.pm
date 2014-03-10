@@ -1,4 +1,5 @@
 package PT::DB::Result::UserNotificationMatrix;
+
 # ABSTRACT:
 
 use Moose;
@@ -12,7 +13,8 @@ __PACKAGE__->table_class('DBIx::Class::ResultSource::View');
 table('user_notification_matrix');
 
 __PACKAGE__->result_source_instance->is_virtual(1);
-__PACKAGE__->result_source_instance->view_definition(q{
+__PACKAGE__->result_source_instance->view_definition(
+    q{
 
 SELECT
   "me"."id"                                       AS "id",
@@ -33,81 +35,82 @@ FROM "user_notification" "me"
 JOIN "user_notification_group" "user_notification_group"
   ON "user_notification_group"."id" = "me"."user_notification_group_id"
 
-});
+}
+);
 
 column id => {
-  data_type => 'bigint',
-  is_nullable => 0,
+    data_type   => 'bigint',
+    is_nullable => 0,
 };
 primary_key 'id';
 
 column user_notification_id => {
-  data_type => 'bigint',
-  is_nullable => 0,
+    data_type   => 'bigint',
+    is_nullable => 0,
 };
 
 column users_id => {
-  data_type => 'bigint',
-  is_nullable => 0,
+    data_type   => 'bigint',
+    is_nullable => 0,
 };
 
 column user_notification_group_id => {
-  data_type => 'bigint',
-  is_nullable => 0,
+    data_type   => 'bigint',
+    is_nullable => 0,
 };
 
 __PACKAGE__->add_context_relations;
 
 column cycle => {
-  data_type => 'int',
-  is_nullable => 0,
+    data_type   => 'int',
+    is_nullable => 0,
 };
 
 column cycle_time => {
-  data_type => 'timestamp with time zone',
-  is_nullable => 1,
+    data_type   => 'timestamp with time zone',
+    is_nullable => 1,
 };
 
 column created => {
-  data_type => 'timestamp with time zone',
-  is_nullable => 0,
+    data_type   => 'timestamp with time zone',
+    is_nullable => 0,
 };
 
 column type => {
-  data_type => 'text',
-  is_nullable => 0,
+    data_type   => 'text',
+    is_nullable => 0,
 };
 
 column group_context => {
-  data_type => 'text',
-  is_nullable => 1,
+    data_type   => 'text',
+    is_nullable => 1,
 };
 
 column sub_context => {
-  data_type => 'text',
-  is_nullable => 0,
+    data_type   => 'text',
+    is_nullable => 0,
 };
 
 column action => {
-  data_type => 'text',
-  is_nullable => 0,
+    data_type   => 'text',
+    is_nullable => 0,
 };
 
 column priority => {
-  data_type => 'int',
-  is_nullable => 0,
+    data_type   => 'int',
+    is_nullable => 0,
 };
 
-belongs_to 'user', 'PT::DB::Result::User', 'users_id', {
-  on_delete => 'no action',
-  on_update => 'no action',
-};
-has_many 'event_notifications', 'PT::DB::Result::EventNotification', 'user_notification_id', {
-  cascade_delete => 0,
-};
-has_many 'event_notification_groups', 'PT::DB::Result::EventNotificationGroup', 'user_notification_group_id', {
-  cascade_delete => 0,
-};
+belongs_to 'user', 'PT::DB::Result::User', 'users_id',
+    {
+    on_delete => 'no action',
+    on_update => 'no action',
+    };
+has_many 'event_notifications', 'PT::DB::Result::EventNotification',
+    'user_notification_id', { cascade_delete => 0, };
+has_many 'event_notification_groups',
+    'PT::DB::Result::EventNotificationGroup', 'user_notification_group_id',
+    { cascade_delete => 0, };
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
