@@ -1,9 +1,16 @@
 #!/usr/bin/env perl
+
 # ABSTRACT: Shorthand to tidy only things that have been changed lately
 
 use strict;
 use warnings;
 use utf8;
+
+=head1 SYNOPSIS
+
+    perltidy.pl # everything modified in git gets tidied
+
+=cut
 
 # `dzil perltidy` is just too bloody slow
 #
@@ -20,8 +27,6 @@ my $git        = Git::Wrapper->new($root);
 my $stats      = $git->status;
 
 my @dirty = ( $stats->get('added'), $stats->get('changed') );
-
-use Data::Dump qw(pp);
 
 sub tidy_vanilla {
   local @ARGV = ();

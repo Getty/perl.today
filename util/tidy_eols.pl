@@ -1,7 +1,13 @@
 #!/usr/bin/env perl
-# FILENAME: tidy_eols.pl
-# CREATED: 03/10/14 18:56:36 by Kent Fredric (kentnl) <kentfredric@gmail.com>
-# ABSTRACT: Tidy End-Of-Lines
+
+# ABSTRACT: Tidy/check End-Of-Lines
+
+=head1 SYNOPIS
+
+    tidy_eols.pl  # verify list is a sane list of things to mess with
+    tidy_eols.pl --apply  # do it
+
+=cut
 
 use strict;
 use warnings;
