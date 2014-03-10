@@ -11,24 +11,24 @@ use namespace::autoclean;
 table 'url';
 
 column id => {
-    data_type         => 'bigint',
-    is_auto_increment => 1,
+  data_type         => 'bigint',
+  is_auto_increment => 1,
 };
 primary_key 'id';
 
 column url => {
-    data_type   => 'text',
-    is_nullable => 0,
+  data_type   => 'text',
+  is_nullable => 0,
 };
 
 column title => {
-    data_type   => 'text',
-    is_nullable => 1,
+  data_type   => 'text',
+  is_nullable => 1,
 };
 
 column content_type => {
-    data_type   => 'text',
-    is_nullable => 0,
+  data_type   => 'text',
+  is_nullable => 0,
 };
 
 has_many 'url_feeds', 'PT::DB::Result::UrlFeed', 'url_id',

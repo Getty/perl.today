@@ -23,32 +23,31 @@ my $kill;
 my $start;
 
 GetOptions(
-    "kill"  => \$kill,
-    "start" => \$start,
+  "kill"  => \$kill,
+  "start" => \$start,
 );
 
 if ($kill) {
-    remove_tree( $config->rootdir_path );
+  remove_tree( $config->rootdir_path );
 
-    # TODO: replace parsing of dsn using regex with some CPAN module, DRY
-    my $db = $1;
-    my $userarg = length( $config->db_user ) ? "-U " . $config->db_user : "";
-    print "Truncating database...\n";
-    system( "dropdb " . $userarg . " " . $config->db_name );
-    if ( !WIFEXITED( ${^CHILD_ERROR_NATIVE} ) ) {
-        my $dsn = $config->db_dsn;
-        $dsn =~ s/(database|dbname)=[\w\d]+/$1=postgres/;
-        my $dbh =
-            DBI->connect( $dsn, $config->db_user, $config->db_password );
-        $dbh->do( "DROP DATABASE " . $config->db_name )   or die $dbh->errstr;
-        $dbh->do( "CREATE DATABASE " . $config->db_name ) or die $dbh->errstr;
-    }
-    else {
-        system( "createdb " . $userarg . " " . $config->db_name );
-    }
+  # TODO: replace parsing of dsn using regex with some CPAN module, DRY
+  my $db = $1;
+  my $userarg = length( $config->db_user ) ? "-U " . $config->db_user : "";
+  print "Truncating database...\n";
+  system( "dropdb " . $userarg . " " . $config->db_name );
+  if ( !WIFEXITED( ${^CHILD_ERROR_NATIVE} ) ) {
+    my $dsn = $config->db_dsn;
+    $dsn =~ s/(database|dbname)=[\w\d]+/$1=postgres/;
+    my $dbh = DBI->connect( $dsn, $config->db_user, $config->db_password );
+    $dbh->do( "DROP DATABASE " . $config->db_name )   or die $dbh->errstr;
+    $dbh->do( "CREATE DATABASE " . $config->db_name ) or die $dbh->errstr;
+  }
+  else {
+    system( "createdb " . $userarg . " " . $config->db_name );
+  }
 }
 elsif ( -d $config->rootdir_path ) {
-    die "environment exist, use --kill to kill it!";
+  die "environment exist, use --kill to kill it!";
 }
 
 print "\n";
@@ -64,26 +63,25 @@ my $pt = PT->new( { config => $config } );
 my $pr;
 
 my $pt_test = PT::Test::Database->new(
-    $pt, 0,
-    sub {
-        print "\n";
-        print
-            "Filling database with test data and updating notifications...\n";
-        print "(It will halt for a bit in the middle to gather all events)\n";
-        print "\n";
-        $pr = String::ProgressBar->new(
-            max           => shift,
-            length        => 60,
-            bar           => '#',
-            show_rotation => 1,
-            print_return  => 0,
-        );
-        $pr->write;
-    },
-    sub {
-        $pr->update(shift);
-        $pr->write;
-    }
+  $pt, 0,
+  sub {
+    print "\n";
+    print "Filling database with test data and updating notifications...\n";
+    print "(It will halt for a bit in the middle to gather all events)\n";
+    print "\n";
+    $pr = String::ProgressBar->new(
+      max           => shift,
+      length        => 60,
+      bar           => '#',
+      show_rotation => 1,
+      print_return  => 0,
+    );
+    $pr->write;
+  },
+  sub {
+    $pr->update(shift);
+    $pr->write;
+  }
 );
 $pt_test->deploy;
 

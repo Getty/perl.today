@@ -13,7 +13,7 @@ __PACKAGE__->table('comment_context');
 
 __PACKAGE__->result_source_instance->is_virtual(1);
 __PACKAGE__->result_source_instance->view_definition(
-    q{
+  q{
   SELECT
     (latest).id AS latest_comment_id,
     (first).id AS first_comment_id,
@@ -43,22 +43,22 @@ __PACKAGE__->result_source_instance->view_definition(
 );
 
 __PACKAGE__->add_columns(
-    latest_comment_id => {
-        data_type         => 'bigint',
-        is_auto_increment => 1,
-    },
-    first_comment_id => {
-        data_type         => 'bigint',
-        is_auto_increment => 1,
-    },
-    comments_context => {
-        data_type   => 'text',
-        is_nullable => 0,
-    },
-    comments_context_id => {
-        data_type   => 'bigint',
-        is_nullable => 0,
-    }
+  latest_comment_id => {
+    data_type         => 'bigint',
+    is_auto_increment => 1,
+  },
+  first_comment_id => {
+    data_type         => 'bigint',
+    is_auto_increment => 1,
+  },
+  comments_context => {
+    data_type   => 'text',
+    is_nullable => 0,
+  },
+  comments_context_id => {
+    data_type   => 'bigint',
+    is_nullable => 0,
+  }
 );
 
 no Moose;

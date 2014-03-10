@@ -11,24 +11,24 @@ use namespace::autoclean;
 table 'user_notification';
 
 column id => {
-    data_type         => 'bigint',
-    is_auto_increment => 1,
+  data_type         => 'bigint',
+  is_auto_increment => 1,
 };
 primary_key 'id';
 
 column users_id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 
 column user_notification_group_id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 
 column context_id => {
-    data_type   => 'bigint',
-    is_nullable => 1,
+  data_type   => 'bigint',
+  is_nullable => 1,
 };
 
 # 1 = Instant (Not yet implemented)
@@ -37,19 +37,19 @@ column context_id => {
 # 4 = Weekly
 
 column cycle => {
-    data_type   => 'int',
-    is_nullable => 0,
+  data_type   => 'int',
+  is_nullable => 0,
 };
 
 column xmpp => {
-    data_type     => 'int',
-    default_value => 0,
+  data_type     => 'int',
+  default_value => 0,
 };
 
 # not yet supported
 column cycle_time => {
-    data_type   => 'timestamp with time zone',
-    is_nullable => 1,
+  data_type   => 'timestamp with time zone',
+  is_nullable => 1,
 };
 
 __PACKAGE__->add_data_created_updated;
@@ -65,8 +65,8 @@ has_many 'event_notifications', 'PT::DB::Result::EventNotification',
 unique_constraint [qw/ user_notification_group_id context_id users_id /];
 
 __PACKAGE__->indices(
-    user_notification_cycle_idx      => 'cycle',
-    user_notification_context_id_idx => 'context_id',
+  user_notification_cycle_idx      => 'cycle',
+  user_notification_context_id_idx => 'context_id',
 );
 
 ###############################

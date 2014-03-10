@@ -16,34 +16,34 @@ has '+is_html5'         => ( default => 1 );
 sub pt { $_[0]->ctx->pt }
 
 sub new_via_obj {
-    my ( $class, $obj, $field_list, %args ) = @_;
-    my @new_field_list;
-    my $it = natatime 2, @{$field_list};
-    while ( my ( $field, $def ) = $it->() ) {
-        push @new_field_list, $field,
-            {
-            element_wrapper_class => ['col-sm-10'],
-            label_class           => ['col-sm-2'],
-            %{$def},
-            };
-    }
-    $class->new(
-        field_list  => \@new_field_list,
-        init_object => $obj,
-        %args,
-    );
+  my ( $class, $obj, $field_list, %args ) = @_;
+  my @new_field_list;
+  my $it = natatime 2, @{$field_list};
+  while ( my ( $field, $def ) = $it->() ) {
+    push @new_field_list, $field,
+        {
+      element_wrapper_class => ['col-sm-10'],
+      label_class           => ['col-sm-2'],
+      %{$def},
+        };
+  }
+  $class->new(
+    field_list  => \@new_field_list,
+    init_object => $obj,
+    %args,
+  );
 }
 
 sub inflate_json {
-    my ( $self, $value ) = @_;
-    my $json = JSON::MaybeXS->new->convert_blessed(1)->utf8(1)->pretty(1);
-    return $json->decode($value);
+  my ( $self, $value ) = @_;
+  my $json = JSON::MaybeXS->new->convert_blessed(1)->utf8(1)->pretty(1);
+  return $json->decode($value);
 }
 
 sub deflate_json {
-    my ( $self, $value ) = @_;
-    my $json = JSON::MaybeXS->new->convert_blessed(1)->utf8(1)->pretty(1);
-    return $json->encode($value);
+  my ( $self, $value ) = @_;
+  my $json = JSON::MaybeXS->new->convert_blessed(1)->utf8(1)->pretty(1);
+  return $json->encode($value);
 }
 
 no Moose;

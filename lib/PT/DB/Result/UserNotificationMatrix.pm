@@ -14,7 +14,7 @@ table('user_notification_matrix');
 
 __PACKAGE__->result_source_instance->is_virtual(1);
 __PACKAGE__->result_source_instance->view_definition(
-    q{
+  q{
 
 SELECT
   "me"."id"                                       AS "id",
@@ -39,72 +39,72 @@ JOIN "user_notification_group" "user_notification_group"
 );
 
 column id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 primary_key 'id';
 
 column user_notification_id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 
 column users_id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 
 column user_notification_group_id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 
 __PACKAGE__->add_context_relations;
 
 column cycle => {
-    data_type   => 'int',
-    is_nullable => 0,
+  data_type   => 'int',
+  is_nullable => 0,
 };
 
 column cycle_time => {
-    data_type   => 'timestamp with time zone',
-    is_nullable => 1,
+  data_type   => 'timestamp with time zone',
+  is_nullable => 1,
 };
 
 column created => {
-    data_type   => 'timestamp with time zone',
-    is_nullable => 0,
+  data_type   => 'timestamp with time zone',
+  is_nullable => 0,
 };
 
 column type => {
-    data_type   => 'text',
-    is_nullable => 0,
+  data_type   => 'text',
+  is_nullable => 0,
 };
 
 column group_context => {
-    data_type   => 'text',
-    is_nullable => 1,
+  data_type   => 'text',
+  is_nullable => 1,
 };
 
 column sub_context => {
-    data_type   => 'text',
-    is_nullable => 0,
+  data_type   => 'text',
+  is_nullable => 0,
 };
 
 column action => {
-    data_type   => 'text',
-    is_nullable => 0,
+  data_type   => 'text',
+  is_nullable => 0,
 };
 
 column priority => {
-    data_type   => 'int',
-    is_nullable => 0,
+  data_type   => 'int',
+  is_nullable => 0,
 };
 
 belongs_to 'user', 'PT::DB::Result::User', 'users_id',
     {
-    on_delete => 'no action',
-    on_update => 'no action',
+  on_delete => 'no action',
+  on_update => 'no action',
     };
 has_many 'event_notifications', 'PT::DB::Result::EventNotification',
     'user_notification_id', { cascade_delete => 0, };

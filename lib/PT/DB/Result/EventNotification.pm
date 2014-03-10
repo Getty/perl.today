@@ -11,42 +11,42 @@ use namespace::autoclean;
 table 'event_notification';
 
 column id => {
-    data_type         => 'bigint',
-    is_auto_increment => 1,
+  data_type         => 'bigint',
+  is_auto_increment => 1,
 };
 primary_key 'id';
 
 column event_id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 
 column sent => {
-    data_type     => 'int',
-    is_nullable   => 0,
-    default_value => 0,
+  data_type     => 'int',
+  is_nullable   => 0,
+  default_value => 0,
 };
 
 column sent => {
-    data_type     => 'int',
-    is_nullable   => 0,
-    default_value => 0,
+  data_type     => 'int',
+  is_nullable   => 0,
+  default_value => 0,
 };
 
 column seen => {
-    data_type     => 'int',
-    is_nullable   => 0,
-    default_value => 0,
+  data_type     => 'int',
+  is_nullable   => 0,
+  default_value => 0,
 };
 
 column event_notification_group_id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 
 column user_notification_id => {
-    data_type   => 'bigint',
-    is_nullable => 0,
+  data_type   => 'bigint',
+  is_nullable => 0,
 };
 
 __PACKAGE__->add_created;
