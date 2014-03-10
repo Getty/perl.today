@@ -38,7 +38,8 @@ sub tidy_vanilla {
 }
 
 for my $status (@dirty) {
-  my $file     = $root->child( $status->from );
+  my $file = $root->child( $status->from );
+  next unless $file =~ /([.](pm|pl|t)$|cpanfile)/;
   my $tidy     = tidy_vanilla;
   my $tidyfile = $file . '.tdy';
   printf qq[Tidying %s\n], $file;
