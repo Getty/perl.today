@@ -80,8 +80,7 @@ column notes => {
 
 column session => {
   data_type => 'text',
-  is_nullable => 0,
-  default_value => '{}',
+  is_nullable => 1,
 };
 sub get_session_data { shift->session }
 sub store_session_data { shift->session(@_) }
