@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   // switch all no-js classes to js classes
   $('.no-js').addClass('js').removeClass('no-js');
-  
+
   // remove all js-remove elements
   $('.js-remove').remove();
 
@@ -20,7 +20,7 @@ $(document).ready(function() {
       text: $(this).data("text"),
       animated_speed: 'fast',
       type: $(this).data("type"),
-    }); 
+    });
   });
 
 });

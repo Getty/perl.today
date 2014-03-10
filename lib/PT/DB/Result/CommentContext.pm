@@ -21,14 +21,14 @@ __PACKAGE__->result_source_instance->view_definition(
     (first).context_id AS comments_context_id
   FROM (
     SELECT (
-      SELECT latest 
+      SELECT latest
       FROM comment latest
       WHERE latest.context = c.context AND latest.context_id = c.context_id
       ORDER BY
         created DESC
       LIMIT 1
     ) AS latest, (
-      SELECT first 
+      SELECT first
       FROM comment first
       WHERE first.context = c.context AND first.context_id = c.context_id
       ORDER BY

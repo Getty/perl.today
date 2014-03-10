@@ -12,13 +12,13 @@
   <p class="notice error">
     <i class="icn icon-warning-sign"></i>This username is already registered.
   </p>
-<: } :> 
-<: if $password_too_short {  :> 
+<: } :>
+<: if $password_too_short {  :>
   <p class="notice error">
     <i class="icn icon-warning-sign"></i>Password must be at least 3 characters.
   </p>
 <: } # with l(), this should be l($string,3) :>
-<: if $password_different {  :> 
+<: if $password_different {  :>
   <p class="notice error">
     <i class="icn icon-warning-sign"></i>The passwords do not match. Please try again.
   </p>
@@ -39,7 +39,7 @@
         <div class="half">
           <label for="password" class="hide palm-block">Password</label>
           <div class="input-wrap"><input type="password" placeholder="Create Password" title="Create Password" name="password" class="text password" /></div>
-        </div>      
+        </div>
         <div class="half">
           <label for="repeat_password" class="hide palm-block">Repeat Password</label>
           <div class="input-wrap"><input type="password" placeholder="Confirm Password" title="Confirm Password" name="repeat_password" class="text password" /></div>
@@ -54,7 +54,7 @@
       </div>
       <div class="half">
         <div class="half"><div class="input-wrap"><input type="submit" value="Create my account" class="button blue submit" name="register" /></div></div>
-      </div>    
-    </form>   
+      </div>
+    </form>
   </div>
 </div>
