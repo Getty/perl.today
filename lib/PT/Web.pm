@@ -10,7 +10,7 @@ use Catalyst qw/
   ConfigLoader
   Static::Simple
   Session
-  Session::Store::File
+  +PT::Web::SessionStore
   Session::State::Cookie
   Authentication
   Session::PerUser
@@ -103,7 +103,7 @@ __PACKAGE__->config(
   },
   'Plugin::Session' => {
     expires => 21600,
-    defined $ENV{PT_TMP} ? ( storage => $ENV{PT_TMP} ) : (),
+#    defined $ENV{PT_TMP} ? ( storage => $ENV{PT_TMP} ) : (),
   },
   'Plugin::Captcha' => {
     session_name => 'captcha_string',

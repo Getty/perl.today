@@ -81,7 +81,6 @@ column notes => {
 column session => {
   data_type => 'text',
   is_nullable => 0,
-  serializer_class => 'JSON',
   default_value => '{}',
 };
 sub get_session_data { shift->session }
