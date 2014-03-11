@@ -16,6 +16,31 @@ has 'url' => (
   required => 1,
 );
 
+=requires C<on_http_response>
+
+    on_http_response( $HTTP_RESPONSE_OBJECT, $PT_FEED_LOOP_OBJECT );
+
+=cut
+
+requires 'on_http_response';
+
+=method C<trigger_http_update>
+
+    $handler->trigger_http_update( $async_http_object, $PT_FEED_LOOP_OBJECT )
+
+=cut
+
+sub trigger_http_update {
+  my ( $self, $async_http, $backing_store ) = @_;
+  $async_http->do_request(
+    uri         => URI->new( $self->uri ),
+    on_response => sub {
+      my ($response) = @_;
+      $self->on_http_response( $response, $backing_store );
+    },
+  );
+}
+
 no Moose::Role;
 
 1;
