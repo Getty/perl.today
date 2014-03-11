@@ -79,6 +79,7 @@ sub deploy {
   $self->pt->deploy_fresh;
   $self->init->( $self->step_count ) if $self->has_init;
   $self->add_users;
+  $self->add_feeds;
 
   # TODO
   # $self->add_threads;
@@ -115,7 +116,7 @@ sub next_step {
 
 sub step_count {
   my ($self) = @_;
-  my $base = 2;
+  my $base = 4;
   return $base unless $self->test;
 }
 
@@ -205,6 +206,42 @@ sub add_comments {
       $self->add_comments( 'PT::DB::Result::Comment', $comment->id,
         @sub_comments );
     }
+  }
+}
+
+#######################################################
+#
+# ███████╗███████╗███████╗██████╗ ███████╗
+# ██╔════╝██╔════╝██╔════╝██╔══██╗██╔════╝
+# █████╗  █████╗  █████╗  ██║  ██║███████╗
+# ██╔══╝  ██╔══╝  ██╔══╝  ██║  ██║╚════██║
+# ██║     ███████╗███████╗██████╔╝███████║
+# ╚═╝     ╚══════╝╚══════╝╚═════╝ ╚══════╝
+
+sub feeds {
+  return (
+    { name       => 'MetaCPAN Recent',
+      url        => 'https://metacpan.org/feed/recent?f=',
+      feed_class => 'RSS',
+    },
+    { name       => 'ETHERs releases',
+      url        => 'https://metacpan.org/feed/author/ETHER',
+      feed_class => 'RSS',
+    },
+  );
+}
+
+sub add_feed {
+  my ( $self, $context, $context_id, %params ) = @_;
+  $self->next_step;
+  my $feed = $self->pt->add_feed(%params);
+  $self->isa_ok( $feed, 'PT::DB::Result::Feed' );
+}
+
+sub add_feeds {
+  my ( $self, $context, $context_id ) = @_;
+  for my $feed ( $self->feeds ) {
+    $self->add_feed( $context, $context_id, %$feed );
   }
 }
 
