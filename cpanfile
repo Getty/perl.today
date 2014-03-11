@@ -77,6 +77,7 @@ requires 'MooseX::Storage',                                        '0.43';
 requires 'namespace::autoclean',                                   '0.14';
 requires 'Net::Async::HTTP',                                       '0';
 requires 'Path::Class',                                            '0.32';
+requires 'Path::Tiny',                                             '0.004';
 requires 'Plack',                                                  '1.0029';
 requires 'Plack::Middleware::Debug',                               '0.16';
 requires 'String::ProgressBar',                                    '0.03';
@@ -91,6 +92,5 @@ on 'develop' => sub {
   requires 'File::Copy',           '0';
   requires 'Git::Wrapper',         '0';
   requires 'Path::Iterator::Rule', '0';
-  requires 'Path::Tiny',           '0.004';
   requires 'Perl::Tidy',           '0';
 };
