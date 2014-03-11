@@ -588,6 +588,14 @@ sub user_counts {
   return \%counts;
 }
 
+sub add_feed {
+  my ( $self, %params ) = @_;
+  return $self->db->resultset('Feed')->create( \%params );
+}
+
+sub add_feed_uri {
+  my ( $self, %params ) = @_;
+}
 #
 # ======== Misc ====================
 #
