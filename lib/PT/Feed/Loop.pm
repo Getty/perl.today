@@ -61,8 +61,9 @@ sub _build_http_agent {
 sub _build_update_worker {
   my ($self) = @_;
   return IO::Async::Timer::Periodic->new(
-    interval => $self->update_interval,
-    on_tick  => sub {
+    interval       => $self->update_interval,
+    first_interval => 5,
+    on_tick        => sub {
       $self->do_update;
     },
   );
