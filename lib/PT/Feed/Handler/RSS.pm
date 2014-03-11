@@ -21,16 +21,16 @@ sub _decode_rss {
   return @{ $state->{'items'} };
 }
 
-=method C<on_http_update>
+=method C<on_http_response>
 
-    ->on_http_update( $async_http_object, $feed_loop_object )
+    ->on_http_response( $async_http_object, $feed_loop_object )
 
 Triggers a get via the C<async_http_object>, then on HTTP response,
 decodes it, and reports the found links to the database for addition.
 
 =cut
 
-sub on_http_update {
+sub on_http_response {
   my ( $self, $http_response, $feed_loop ) = @_;
   return unless $http_response->is_success;
   my $content = $http_response->decoded_content;
@@ -38,8 +38,10 @@ sub on_http_update {
   for my $item (@items) {
     next unless $item->{'title'};
     next unless $item->{'link'};
-    $feed_loop->add_uri(
-      feed  => $self->uri,
+
+#STDERR->printf("Got URI title=%s url=%s\n", $item->{'title'}, $item->{'link'} );
+    $feed_loop->pt->add_feed_uri(
+      feed  => $self->url,
       title => $item->{'title'},
       link  => $item->{'link'},
     );

@@ -33,7 +33,7 @@ requires 'on_http_response';
 sub trigger_http_update {
   my ( $self, $async_http, $backing_store ) = @_;
   $async_http->do_request(
-    uri         => URI->new( $self->uri ),
+    uri         => URI->new( $self->url ),
     on_response => sub {
       my ($response) = @_;
       $self->on_http_response( $response, $backing_store );

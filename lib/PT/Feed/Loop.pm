@@ -15,6 +15,7 @@ use IO::Async::Timer::Periodic;
 use IO::Async::SSL;
 use Net::Async::HTTP;
 use PT::DB;
+use PT::Feed::Handler::RSS;
 
 =head1 SYNOPSIS
 
@@ -78,7 +79,7 @@ sub do_update {
   my $rs = $self->pt->db->resultset('Feed')->search;
   while ( my $feed = $rs->next ) {
     my $handler = $feed->feed_handler;
-    $handler->trigger_update( $self->http_agent, $self );
+    $handler->trigger_http_update( $self->http_agent, $self );
   }
   return;
 }
