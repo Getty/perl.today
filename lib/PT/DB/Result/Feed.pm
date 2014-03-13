@@ -26,6 +26,25 @@ column url => {
   is_nullable => 0,
 };
 
+# not shown if not given
+column web_url => {
+  data_type   => 'text',
+  is_nullable => 1,
+};
+
+# using of web_url favicon.ico if not set
+column icon_url => {
+  data_type   => 'text',
+  is_nullable => 1,
+};
+
+# workaround flag till introduction of categories
+column jobs => {
+  data_type     => 'int',
+  is_nullable   => 0,
+  default_value => 0,
+};
+
 column feed_class => {
   data_type   => 'text',
   is_nullable => 0,

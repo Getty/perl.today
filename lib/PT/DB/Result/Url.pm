@@ -31,6 +31,11 @@ column content_type => {
   is_nullable => 0,
 };
 
+column content_timestamp => {
+  data_type   => 'timestamp with time zone',
+  is_nullable => 1,
+};
+
 has_many 'url_feeds', 'PT::DB::Result::UrlFeed', 'url_id',
     { cascade_delete => 0, };
 
