@@ -210,22 +210,49 @@ sub add_comments {
 }
 
 #######################################################
+#  _____ _____ _____ ____  ____
+# |  ___| ____| ____|  _ \/ ___|
+# | |_  |  _| |  _| | | | \___ \
+# |  _| | |___| |___| |_| |___) |
+# |_|   |_____|_____|____/|____/
 #
-# ███████╗███████╗███████╗██████╗ ███████╗
-# ██╔════╝██╔════╝██╔════╝██╔══██╗██╔════╝
-# █████╗  █████╗  █████╗  ██║  ██║███████╗
-# ██╔══╝  ██╔══╝  ██╔══╝  ██║  ██║╚════██║
-# ██║     ███████╗███████╗██████╔╝███████║
-# ╚═╝     ╚══════╝╚══════╝╚═════╝ ╚══════╝
 
 sub feeds {
   return (
-    { name       => 'MetaCPAN Recent',
-      url        => 'https://metacpan.org/feed/recent?f=',
+    { name       => 'jobs.perl.org',
+      url        => 'http://jobs.perl.org/rss/standard.rss',
       feed_class => 'RSS',
     },
-    { name       => 'ETHERs releases',
-      url        => 'https://metacpan.org/feed/author/ETHER',
+    { name       => 'blogs.perl.org',
+      url        => 'http://blogs.perl.org/atom.xml',
+      feed_class => 'RSS',
+    },
+    { name       => 'Moose Blog',
+      url        => 'http://blog.moose.perl.org/atom.xml',
+      feed_class => 'RSS',
+    },
+    { name       => 'Perl NOC',
+      url        => 'http://log.perl.org/feeds/posts/default',
+      feed_class => 'RSS',
+    },
+    { name       => 'Ricardo Signes',
+      url        => 'http://rjbs.manxome.org/rubric/entries?format=rss',
+      feed_class => 'RSS',
+    },
+    { name       => 'David Golden',
+      url        => 'http://www.dagolden.com/index.php/comments/feed/',
+      feed_class => 'RSS',
+    },
+    { name       => 'Perl Hacks',
+      url        => 'http://perlhacks.com/feed/',
+      feed_class => 'RSS',
+    },
+    { name       => 'Sebastian Kraih',
+      url        => 'http://blog.kraih.com/rss',
+      feed_class => 'RSS',
+    },
+    { name       => 'perl.com',
+      url        => 'http://www.perl.com/pub/atom.xml',
       feed_class => 'RSS',
     },
   );

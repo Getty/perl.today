@@ -15,13 +15,13 @@ use Moose::Util qw/ apply_all_roles /;
 __PACKAGE__->load_components(
   qw/
       EncodedColumn
-      Core
       TimeStamp
       InflateColumn::DateTime
       InflateColumn::Serializer
       Helper::Row::OnColumnChange
       Helper::Row::ProxyResultSetMethod
       +DBICx::Indexing
+      Core
       /
 );
 

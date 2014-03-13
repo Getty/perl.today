@@ -51,5 +51,11 @@ sub without_events {
   return;
 }
 
+# CREATE UNIQUE INDEX users_username ON users ((lower(username)));
+sub sqlt_deploy_hook {
+
+  #  use DDP; p($_[1]->get_tables); 1;
+}
+
 no Moose;
 __PACKAGE__->meta->make_immutable( inline_constructor => 0 );
