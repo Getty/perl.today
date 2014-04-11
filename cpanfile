@@ -68,6 +68,7 @@ requires 'JSON',                                                   '2.61';
 requires 'JSON::MaybeXS',                                          '1.000000';
 requires 'List::MoreUtils',                                        '0.33';
 requires 'Locale::Simple',                                         '0.016';
+requires 'Log::Contextual',                                        '0';
 requires 'LWP::Simple',                                            '6.00';
 requires 'Moo',                                                    '1.004001';
 requires 'Moose',                                                  '2.1005';

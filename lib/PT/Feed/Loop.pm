@@ -16,6 +16,7 @@ use IO::Async::SSL;
 use Net::Async::HTTP;
 use PT::DB;
 use PT::Feed::Handler::RSS;
+use Log::Contextual qw( log_debug log_trace );
 
 =head1 SYNOPSIS
 
@@ -64,6 +65,7 @@ sub _build_update_worker {
     interval       => $self->update_interval,
     first_interval => 5,
     on_tick        => sub {
+      log_trace {"Loop.Tick"};
       $self->do_update;
     },
   );
@@ -80,6 +82,10 @@ sub do_update {
   my $rs = $self->pt->db->resultset('Feed')->search;
   while ( my $feed = $rs->next ) {
     my $handler = $feed->feed_handler;
+    log_trace {
+      sprintf "Trigger.Update feed.name=%s feed.url=%s", $feed->name,
+          $feed->url;
+    };
     $handler->trigger_http_update( $self->http_agent, $self );
   }
   return;
@@ -93,7 +99,9 @@ Starts the eventloop
 
 sub run {
   my ($self) = @_;
+  log_trace {"Loop: Starting Periodic update ticker"};
   $self->update_worker->start;
+  log_trace {"Loop: Starting Main Loop"};
   return $self->loop->run;
 }
 

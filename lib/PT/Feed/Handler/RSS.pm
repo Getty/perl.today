@@ -11,6 +11,7 @@ package PT::Feed::Handler::RSS;
 
 use Moose;
 use XML::RSS;
+use Log::Contextual qw( log_trace log_debug log_info );
 
 with 'PT::Feed::Role::Handler';
 
@@ -32,14 +33,38 @@ decodes it, and reports the found links to the database for addition.
 
 sub on_http_response {
   my ( $self, $http_response, $feed_loop ) = @_;
+  log_trace {
+    sprintf 'Handler.RSS.response for %s = %s', $self->url,
+        $http_response->is_success ? 1 : 0;
+  };
+  if ( not $http_response->is_success ) {
+    log_info {
+      sprintf 'Handler.RSS.response got no response for %s', $self->url;
+    };
+  }
   return unless $http_response->is_success;
   my $content = $http_response->decoded_content;
   my (@items) = $self->_decode_rss($content);
+  log_trace {
+    sprintf 'Handler.RSS.response for %s got %s items', $self->url,
+        scalar @items;
+  };
+  if ( not @items ) {
+    log_info {
+      sprintf 'Handler.RSS.response got no items for %s', $self->url;
+    };
+    return;
+  }
   for my $item (@items) {
     next unless $item->{'title'};
     next unless $item->{'link'};
 
-#STDERR->printf("Got URI title=%s url=%s\n", $item->{'title'}, $item->{'link'} );
+    log_trace {
+      sprintf 'Handler.RSS.response.add_feed_uri feed=%s title=%s url=%s',
+          $self->url,
+          $item->{title},
+          $item->{link};
+    };
     $feed_loop->pt->add_feed_uri(
       feed  => $self->url,
       title => $item->{'title'},
