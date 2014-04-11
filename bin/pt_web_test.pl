@@ -1,15 +1,13 @@
 #!/usr/bin/env perl
 
-# PODNAME: bobby_tables.pl
+# PODNAME: pt_web_test.pl
+
+# ABSTRACT: Catalyst Test
 
 use Catalyst::ScriptRunner;
 Catalyst::ScriptRunner->run( 'PT::Web', 'Test' );
 
 1;
-
-=head1 NAME
-
-pt_web_test.pl - Catalyst Test
 
 =head1 SYNOPSIS
 
@@ -30,13 +28,3 @@ pt_web_test.pl [options] uri
 
 Run a Catalyst action from the command line.
 
-=head1 AUTHORS
-
-Catalyst Contributors, see Catalyst.pm
-
-=head1 COPYRIGHT
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut

@@ -1,5 +1,7 @@
 package PT::Web::Form;
 
+# ABSTRACT: A generic Web Form
+
 use Moose;
 extends 'HTML::FormHandler';
 use List::MoreUtils qw( natatime );

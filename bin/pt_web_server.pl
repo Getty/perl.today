@@ -6,14 +6,12 @@ BEGIN {
 
 # PODNAME: pt_web_server.pl
 
+# ABSTRACT: Catalyst Test Server
+
 use Catalyst::ScriptRunner;
 Catalyst::ScriptRunner->run( 'PT::Web', 'Server' );
 
 1;
-
-=head1 NAME
-
-pt_web_server.pl - Catalyst Test Server
 
 =head1 SYNOPSIS
 

@@ -2,14 +2,12 @@
 
 # PODNAME: pt_web_fastcgi.pl
 
+# ABSTRACT: Catalyst FastCGI
+
 use Catalyst::ScriptRunner;
 Catalyst::ScriptRunner->run( 'PT::Web', 'FastCGI' );
 
 1;
-
-=head1 NAME
-
-pt_web_fastcgi.pl - Catalyst FastCGI
 
 =head1 SYNOPSIS
 
