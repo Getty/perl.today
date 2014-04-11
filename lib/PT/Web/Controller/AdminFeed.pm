@@ -1,4 +1,5 @@
 package PT::Web::Controller::AdminFeed;
+
 use Moose;
 use namespace::autoclean;
 
