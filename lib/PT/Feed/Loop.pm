@@ -65,7 +65,7 @@ sub _build_update_worker {
     interval       => $self->update_interval,
     first_interval => 5,
     on_tick        => sub {
-      log_trace {"Loop.Tick"};
+      log_debug {"Loop.Tick"};
       $self->do_update;
     },
   );
