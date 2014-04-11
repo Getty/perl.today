@@ -11,7 +11,7 @@ package PT::Feed::Handler::Atom;
 
 use Moose;
 use XML::Atom::Feed;
-use Log::Contextual qw( log_trace log_debug log_info );
+use PT::Log::Contextual qw( log_trace log_debug log_info );
 
 with 'PT::Feed::Role::Handler';
 

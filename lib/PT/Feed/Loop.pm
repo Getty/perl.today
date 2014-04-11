@@ -16,7 +16,7 @@ use IO::Async::SSL;
 use Net::Async::HTTP;
 use PT::DB;
 use PT::Feed::Handler::RSS;
-use Log::Contextual qw( log_debug log_trace );
+use PT::Log::Contextual qw( log_debug log_trace );
 
 =head1 SYNOPSIS
 

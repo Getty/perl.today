@@ -11,7 +11,7 @@ package PT::Feed::Handler::RSS;
 
 use Moose;
 use XML::RSS;
-use Log::Contextual qw( log_trace log_debug log_info );
+use PT::Log::Contextual qw( log_trace log_debug log_info );
 
 with 'PT::Feed::Role::Handler';
 
