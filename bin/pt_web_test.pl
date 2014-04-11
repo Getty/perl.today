@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# PODNAME: bobby_tables.pl
+
 use Catalyst::ScriptRunner;
 Catalyst::ScriptRunner->run( 'PT::Web', 'Test' );
 

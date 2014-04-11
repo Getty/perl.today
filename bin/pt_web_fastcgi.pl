@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# PODNAME: pt_web_fastcgi.pl
+
 use Catalyst::ScriptRunner;
 Catalyst::ScriptRunner->run( 'PT::Web', 'FastCGI' );
 

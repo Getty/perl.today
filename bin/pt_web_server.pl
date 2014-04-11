@@ -4,6 +4,8 @@ BEGIN {
   $ENV{CATALYST_SCRIPT_GEN} = 40;
 }
 
+# PODNAME: pt_web_server.pl
+
 use Catalyst::ScriptRunner;
 Catalyst::ScriptRunner->run( 'PT::Web', 'Server' );
 

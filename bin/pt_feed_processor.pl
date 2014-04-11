@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# PODNAME: pt_feed_processor.pl
+
 # ABSTRACT: A Daemon that monitors feeds
 
 use strict;
