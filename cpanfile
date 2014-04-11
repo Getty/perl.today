@@ -87,6 +87,7 @@ requires 'Text::Fuzzy',                                            '0.14';
 requires 'URI::Find::Simple',                                      '1.03';
 requires 'URL::Encode',                                            '0.01';
 requires 'WWW::Authy',                                             '0.002';
+requires 'XML::Atom',                                              '0';
 requires 'XML::RSS',                                               '0';
 
 on 'develop' => sub {
