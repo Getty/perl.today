@@ -21,11 +21,46 @@ has 'feed' => (
 
 =requires C<on_http_response>
 
-    on_http_response( $HTTP_RESPONSE_OBJECT, $PT_FEED_LOOP_OBJECT );
+    on_http_success( $HTTP_RESPONSE_OBJECT, $PT_FEED_LOOP_OBJECT );
 
 =cut
 
-requires 'on_http_response';
+requires 'on_http_success';
+
+=method C<on_http_response>
+
+  on_http_response( $HTTP_RESPONSE_OBJECT, $PT_FEED_LOOP_OBJECT );
+
+Dispatches to C<on_http_success> if C<$HTTP_RESPONSE_OBJECT> is successful.
+
+Otherwise C<log_info> and skip processing.
+
+=cut
+
+sub on_http_response {
+  my ( $self, $http_response, $feed_loop ) = @_;
+  my $is_success = $http_response->is_success;
+  log_trace {
+    sprintf
+        "Handler.on_http_response: feed=[%s] class=[%s] url=[%s] success=[%s]",
+        $self->feed->name,
+        $self->feed->feed_class,
+        $self->feed->url,
+        ( $is_success ? 1 : 0 );
+  };
+  if ( not $is_success ) {
+    log_info {
+      sprintf
+          "Handler.on_http_response: HTTP Request Failed. feed=[%s] class=[%s] url=[%s] status=[%s]",
+          $self->feed->name,
+          $self->feed->feed_class,
+          $self->feed->url,
+          $http_response->status_line;
+    };
+    return;
+  }
+  return $self->on_http_success( $http_response, $feed_loop );
+}
 
 =method C<trigger_http_update>
 
@@ -34,12 +69,12 @@ requires 'on_http_response';
 =cut
 
 sub trigger_http_update {
-  my ( $self, $async_http, $backing_store ) = @_;
+  my ( $self, $async_http, $feed_loop ) = @_;
   $async_http->do_request(
     uri         => URI->new( $self->url ),
     on_response => sub {
       my ($response) = @_;
-      $self->on_http_response( $response, $backing_store );
+      $self->on_http_response( $response, $feed_loop );
     },
   );
 }

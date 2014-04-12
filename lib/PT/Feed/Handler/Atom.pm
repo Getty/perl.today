@@ -21,27 +21,17 @@ sub _decode_atom {
   return $state->entries;
 }
 
-=method C<on_http_response>
+=method C<on_http_success>
 
-    ->on_http_response( $async_http_object, $feed_loop_object )
+    ->on_http_success( $async_http_object, $feed_loop_object )
 
 Triggers a get via the C<async_http_object>, then on HTTP response,
 decodes it, and reports the found links to the database for addition.
 
 =cut
 
-sub on_http_response {
+sub on_http_success {
   my ( $self, $http_response, $feed_loop ) = @_;
-  log_trace {
-    sprintf 'Handler.Atom.response for %s = %s', $self->url,
-        $http_response->is_success ? 1 : 0;
-  };
-  if ( not $http_response->is_success ) {
-    log_info {
-      sprintf 'Handler.Atom.response got no response for %s', $self->url;
-    };
-  }
-  return unless $http_response->is_success;
   my $content = $http_response->decoded_content;
   my (@items) = $self->_decode_atom($content);
   log_trace {
