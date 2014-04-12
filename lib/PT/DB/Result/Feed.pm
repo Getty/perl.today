@@ -72,6 +72,16 @@ sub field_list {
   ];
 }
 
+=method C<feed_handler>
+
+Fetch an instance of a C<PT::Feed::Handler::*> for the current feed.
+
+  my $handler = $result->feed_handler();
+
+The exact handler returned will be based on C<$feed_class>
+
+=cut
+
 sub feed_handler {
   my ($self) = @_;
   require PT::Feed;
