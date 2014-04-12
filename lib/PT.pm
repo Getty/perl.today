@@ -598,12 +598,7 @@ sub add_feed_uri {
   my $url = $self->db->resultset('Url')->search( { 'url' => $params{link} } )
       ->single;
   if ( not $url ) {
-    $url = $self->db->resultset('Url')->create(
-      { url          => $params{link},
-        title        => $params{title},
-        content_type => $params{'content_type'},
-      }
-    );
+    $url = $self->db->resultset('Url')->create( { url => $params{link}, } );
   }
   my $url_feed = $self->db->resultset('UrlFeed')->search(
     { url_id  => $url->id,
