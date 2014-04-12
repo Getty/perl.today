@@ -28,7 +28,7 @@ column title => {
 
 column content_type => {
   data_type   => 'text',
-  is_nullable => 0,
+  is_nullable => 1,
 };
 
 column content_timestamp => {
