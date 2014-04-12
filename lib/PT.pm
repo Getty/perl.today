@@ -595,7 +595,6 @@ sub add_feed {
 
 sub add_feed_uri {
   my ( $self, %params ) = @_;
-  $params{'content_type'} = 'unknown' unless exists $params{'content_type'};
   my $url = $self->db->resultset('Url')->search( { 'url' => $params{link} } )
       ->single;
   if ( not $url ) {
