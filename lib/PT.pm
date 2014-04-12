@@ -609,6 +609,8 @@ sub add_feed_uri {
     $url_feed = $self->db->resultset('UrlFeed')->create(
       { url_id  => $url->id,
         feed_id => $params{feed}->id,
+        title   => $params{title},
+
       }
     );
   }
