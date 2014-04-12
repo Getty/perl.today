@@ -10,6 +10,7 @@ package PT::Feed::Role::Handler;
 # AUTHORITY
 
 use Moose::Role;
+use PT::Log::Contextual qw( log_trace log_debug log_info );
 
 has 'feed' => (
   isa      => 'PT::DB::Result::Feed',
@@ -41,6 +42,32 @@ sub trigger_http_update {
       $self->on_http_response( $response, $backing_store );
     },
   );
+}
+
+=method C<add_url>
+
+Utility method to be called from C<on_http_response> to signal
+that this feed has items.
+
+=cut
+
+sub add_url {
+  my ( $self, $pt, $title, $url ) = @_;
+  return unless $title;
+  return unless $url;
+  log_trace {
+    sprintf "Handler.add_url: feed=[%s] class=[%s] title=[%s] url=[%s]",
+        $self->feed->name,
+        $self->feed->feed_class,
+        $title,
+        $url;
+  };
+  $pt->add_feed_uri(
+    feed  => $self->feed,
+    title => $title,
+    link  => $url,
+  );
+  return;
 }
 
 no Moose::Role;

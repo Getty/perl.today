@@ -55,20 +55,7 @@ sub on_http_response {
     return;
   }
   for my $item (@items) {
-    next unless $item->title;
-    next unless $item->link->href;
-
-    log_trace {
-      sprintf 'Handler.Atom.response.add_feed_uri feed=%s title=%s url=%s',
-          $self->url,
-          $item->title,
-          $item->link->href;
-    };
-    $feed_loop->pt->add_feed_uri(
-      feed  => $self->url,
-      title => $item->title,
-      link  => $item->link->href,
-    );
+    $self->add_url( $feed_loop->pt, $item->title, $item->link->href );
   }
 }
 

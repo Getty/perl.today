@@ -56,20 +56,7 @@ sub on_http_response {
     return;
   }
   for my $item (@items) {
-    next unless $item->{'title'};
-    next unless $item->{'link'};
-
-    log_trace {
-      sprintf 'Handler.RSS.response.add_feed_uri feed=%s title=%s url=%s',
-          $self->url,
-          $item->{title},
-          $item->{link};
-    };
-    $feed_loop->pt->add_feed_uri(
-      feed  => $self->url,
-      title => $item->{'title'},
-      link  => $item->{'link'},
-    );
+    $self->add_url( $feed_loop->pt, $item->{'title'}, $item->{'link'} );
   }
 }
 
