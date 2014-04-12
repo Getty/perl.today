@@ -31,6 +31,12 @@ column content_type => {
   is_nullable => 1,
 };
 
+column fetched => {
+  data_type     => 'bool',
+  is_nullable   => 0,
+  default_value => 'false',
+};
+
 column content_timestamp => {
   data_type   => 'timestamp with time zone',
   is_nullable => 1,
