@@ -11,9 +11,11 @@ package PT::Feed::Role::Handler;
 
 use Moose::Role;
 
-has 'url' => (
+has 'feed' => (
+  isa      => 'PT::DB::Result::Feed',
   is       => ro =>,
   required => 1,
+  handles  => { url => 'url', },
 );
 
 =requires C<on_http_response>

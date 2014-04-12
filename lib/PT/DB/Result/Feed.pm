@@ -85,7 +85,7 @@ The exact handler returned will be based on C<$feed_class>
 sub feed_handler {
   my ($self) = @_;
   require PT::Feed;
-  return PT::Feed->feed_handler( $self->feed_class, $self->url,
+  return PT::Feed->feed_handler( $self->feed_class, $self,
     %{ $self->feed_args } );
 }
 
